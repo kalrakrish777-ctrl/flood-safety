@@ -1084,8 +1084,8 @@
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            if (tabId === 'quiz' && selectedQuestions.length === 0) {
-                generateQuiz();
+            if (tabId === 'quiz') {
+                setTimeout(generateQuiz, 100);
             }
         }
 
@@ -1195,6 +1195,10 @@
             const restartBtn = document.getElementById('restart-quiz');
             if (restartBtn) {
                 restartBtn.addEventListener('click', generateQuiz);
+            }
+            
+            if (document.getElementById('quiz').classList.contains('active')) {
+                generateQuiz();
             }
         });
     </script>

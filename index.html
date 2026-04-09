@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Safety - Stay Prepared</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .emergency-box {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            display: inline-block;
+        }
+
+        .emergency-box strong {
+            font-size: 1.3rem;
+        }
+
+        section {
+            padding: 3rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-before {
+            background: linear-gradient(180deg, #ebf8ff 0%, #bee3f8 100%);
+        }
+
+        .section-during {
+            background: linear-gradient(180deg, #fffaf0 0%, #feebc8 100%);
+        }
+
+        .section-after {
+            background: linear-gradient(180deg, #f0fff4 0%, #c6f6d5 100%);
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid;
+        }
+
+        .section-before h2 {
+            color: #2b6cb0;
+            border-color: #2b6cb0;
+        }
+
+        .section-during h2 {
+            color: #c05621;
+            border-color: #dd6b20;
+        }
+
+        .section-after h2 {
+            color: #276749;
+            border-color: #38a169;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .section-before .checklist li::before {
+            color: #2b6cb0;
+        }
+
+        .section-during .checklist li::before {
+            color: #dd6b20;
+        }
+
+        .section-after .checklist li::before {
+            color: #38a169;
+        }
+
+        .tip-box {
+            background: white;
+            border-left: 4px solid;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .section-before .tip-box {
+            border-color: #2b6cb0;
+        }
+
+        .section-during .tip-box {
+            border-color: #dd6b20;
+        }
+
+        .section-after .tip-box {
+            border-color: #38a169;
+        }
+
+        .tip-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box.warning {
+            background: #fff5f5;
+            border-color: #e53e3e;
+        }
+
+        .tip-box.warning strong {
+            color: #c53030;
+        }
+
+        footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .team-info {
+            display: inline-block;
+            background: #2d3748;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .team-info p {
+            margin: 0.3rem 0;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flood Safety</h1>
+        <nav>
+            <a href="#before">Before a Flood</a>
+            <a href="#during">During a Flood</a>
+            <a href="#after">After a Flood</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Protect Your Family, Stay Informed</h2>
+        <p>Learn essential safety steps to prepare for, respond to, and recover from flooding emergencies.</p>
+        <div class="emergency-box">
+            <strong>Emergency: Call 911</strong><br>
+            Local Emergency: (555) 123-4567<br>
+            FEMA: 1-800-621-3362
+        </div>
+    </div>
+
+    <section id="before" class="section-before">
+        <h2>Before a Flood</h2>
+        <p>Preparation is key. Take these steps before flooding occurs to keep your family safe.</p>
+        
+        <ul class="checklist">
+            <li><strong>Build an emergency kit</strong> with water (1 gallon per person per day), non-perishable food, flashlight, batteries, first aid supplies, and medications.</li>
+            <li><strong>Create a family communication plan</strong> with meeting points and emergency contacts written down and shared with all family members.</li>
+            <li><strong>Know your evacuation routes</strong> - identify high ground locations and practice reaching them from your home.</li>
+            <li><strong>Protect important documents</strong> by placing them in waterproof bags or storing digital copies in cloud storage.</li>
+            <li><strong>Elevate utilities</strong> - move electrical panels, furnaces, and water heaters to higher floors if possible.</li>
+            <li><strong>Sign up for emergency alerts</strong> through your local government notification system.</li>
+            <li><strong>Clear gutters and drains</strong> around your property to allow water to flow away from your home.</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>Pro Tip: Important Documents</strong>
+            Keep copies of insurance policies, identification, bank records, and medical information in a secure, waterproof location.
+        </div>
+    </section>
+
+    <section id="during" class="section-during">
+        <h2>During a Flood</h2>
+        <p>When flooding occurs, act quickly and stay calm. Your decisions matter.</p>
+
+        <ul class="checklist">
+            <li><strong>Move to higher ground immediately</strong> - go to the highest level of your home or a neighbor's if needed.</li>
+            <li><strong>Never walk, swim, or drive through flood waters</strong> - just 6 inches of moving water can knock you down, and 12 inches can sweep a car away.</li>
+            <li><strong>Listen to emergency broadcasts</strong> - TV, radio, or NOAA Weather Radio for updates and instructions.</li>
+            <li><strong>Turn off utilities</strong> if instructed and if you can do so safely without standing in water.</li>
+            <li><strong>Avoid bridges over fast-moving water</strong> - find alternate routes or wait for rescue if trapped.</li>
+            <li><strong>Stay inside until officially declared safe</strong> - even if the rain stops, flooding can continue for hours.</li>
+        </ul>
+
+        <div class="tip-box warning">
+            <strong>WARNING: Never Drive Through Flood Water</strong>
+            Most flood deaths occur in vehicles. If your car stalls in rising water, abandon it immediately and move to higher ground.
+        </div>
+    </section>
+
+    <section id="after" class="section-after">
+        <h2>After a Flood</h2>
+        <p>The danger isn't over when the water recedes. Follow these steps for safe recovery.</p>
+
+        <ul class="checklist">
+            <li><strong>Return home only when authorities say it's safe</strong> - check for structural damage before entering.</li>
+            <li><strong>Wear protective gear</strong> including boots, gloves, and masks when cleaning - flood water may contain sewage and chemicals.</li>
+            <li><strong>Document all damage</strong> with photos and videos before starting cleanup for insurance purposes.</li>
+            <li><strong>Discard food and water</strong> that may have come into contact with flood water - when in doubt, throw it out.</li>
+            <li><strong> ventilate and dry your home</strong> - open doors and windows, use fans and dehumidifiers to prevent mold.</li>
+            <li><strong>Check for gas leaks</strong> - if you smell gas or hear hissing, leave immediately and call the gas company.</li>
+            <li><strong>Contact your insurance company</strong> as soon as possible to start the claims process.</li>
+            <li><strong>Seek medical attention</strong> for any injuries, and watch for signs of infection or illness.</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>Recovery Tip: Watch for Mold</strong>
+            Mold can begin growing within 24-48 hours. Dry out your home quickly and clean all surfaces with a bleach solution (1 cup bleach per gallon of water).
+        </div>
+    </section>
+
+    <footer>
+        <h3>Flood-Safety Hackathon Submission</h3>
+        <div class="team-info">
+            <p><strong>Team:</strong> Safety Specialists</p>
+            <p><strong>School:</strong> California High</p>
+            <p><strong>Grade:</strong> 11</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -242,7 +242,160 @@
             font-size: 1rem;
         }
 
-        .timeline {
+        /* Stats Section */
+        .stats-section {
+            background: var(--dark);
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .stats-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stats-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            letter-spacing: -0.03em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background: var(--cream);
+            padding: 5rem 2rem;
+        }
+
+        .tips-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tips-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            letter-spacing: -0.03em;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent-light);
+        }
+
+        .tip-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #a84d2e 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--accent);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Timeline */
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
@@ -295,8 +448,29 @@
 
         .timeline-item .desc {
             color: var(--text-light);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-size: 0.95rem;
+        }
+
+        .timeline-item .timeline-list {
+            list-style: none;
+            margin: 0 0 1.5rem 0;
+            padding: 0;
+        }
+
+        .timeline-item .timeline-list li {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .timeline-item .timeline-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
         }
 
         .timeline-item .check-btn {
@@ -738,6 +912,56 @@
                 font-size: 2rem;
             }
 
+            .stats-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .stats-content h2 {
+                font-size: 1.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 1.5rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .tips-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .tips-content h2 {
+                font-size: 1.75rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .cta-content h2 {
+                font-size: 1.75rem;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
             footer .footer-content {
                 flex-direction: column;
                 text-align: center;
@@ -794,6 +1018,56 @@
             </div>
         </section>
 
+        <!-- Why This Matters -->
+        <section class="stats-section">
+            <div class="stats-content">
+                <h2>Why Flood Safety Matters</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">90%</span>
+                        <span class="stat-label">of US floods are flash floods that can strike within minutes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">6"</span>
+                        <span class="stat-label">of moving water can knock an adult down</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12"</span>
+                        <span class="stat-label">of water can sweep a car away</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24hr</span>
+                        <span class="stat-label">mold can begin growing after water damage</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Tips -->
+        <section class="tips-section">
+            <div class="tips-content">
+                <h2>Key Safety Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">💧</div>
+                        <h3>Never Drive Through Water</h3>
+                        <p>Just 12 inches of flowing water can sweep your vehicle away. Turn around, don't drown.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🏠</div>
+                        <h3>Know Your Zone</h3>
+                        <p>Learn if you live in a flood zone. Check FEMA maps and know your evacuation routes.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📦</div>
+                        <h3>Emergency Kit Ready</h3>
+                        <p>Keep water, food, flashlight, batteries, and first aid supplies accessible at all times.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
         <section class="timeline-section">
             <div class="timeline-header">
                 <h2>3 Phases of Safety</h2>
@@ -805,20 +1079,44 @@
                     <span class="number">01</span>
                     <h3>Before</h3>
                     <p class="desc">Prepare your home and family before disaster strikes.</p>
+                    <ul class="timeline-list">
+                        <li>Build emergency kit</li>
+                        <li>Create communication plan</li>
+                        <li>Know evacuation routes</li>
+                    </ul>
                     <button class="check-btn">View Checklist</button>
                 </div>
                 <div class="timeline-item" onclick="openTab('during')">
                     <span class="number">02</span>
                     <h3>During</h3>
                     <p class="desc">Stay calm and make smart decisions when flooding occurs.</p>
+                    <ul class="timeline-list">
+                        <li>Move to higher ground</li>
+                        <li>Avoid flood waters</li>
+                        <li>Listen to officials</li>
+                    </ul>
                     <button class="check-btn">View Checklist</button>
                 </div>
                 <div class="timeline-item" onclick="openTab('after')">
                     <span class="number">03</span>
                     <h3>After</h3>
                     <p class="desc">Recover safely and document damage for insurance.</p>
+                    <ul class="timeline-list">
+                        <li>Wait for clearance</li>
+                        <li>Document damage</li>
+                        <li>Contact insurance</li>
+                    </ul>
                     <button class="check-btn">View Checklist</button>
                 </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Test Your Knowledge</h2>
+                <p>Take our interactive quiz to see how much you've learned about flood safety.</p>
+                <button class="cta-btn" onclick="openTab('quiz')">Take the Quiz</button>
             </div>
         </section>
     </div>

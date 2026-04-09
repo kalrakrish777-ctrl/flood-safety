@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz — Flood Safety</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 3C18 3 6 14 6 22C6 27.5228 10.4772 32 18 32C25.5228 32 30 27.5228 30 22C30 14 18 3 18 3Z" fill="#C45D3A"/>
+                <path d="M18 8C18 8 10 16 10 21C10 24.3137 13.6863 27 18 27" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Flood Safety</span>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="before.html">Before</a>
+            <a href="during.html">During</a>
+            <a href="after.html">After</a>
+            <a href="quiz.html" class="active">Quiz</a>
+        </nav>
+    </header>
+
+    <section class="quiz-section">
+        <div class="content-wrapper">
+            <h2>Test Your Knowledge</h2>
+            <p class="section-intro">Answer these questions to see how much you've learned. Questions are randomly selected each time you take the quiz.</p>
+
+            <div id="quiz-container"></div>
+
+            <div class="quiz-results" id="quiz-results">
+                <h3>Quiz Complete!</h3>
+                <div class="score"><span id="score">0</span>/5</div>
+                <p id="score-message"></p>
+                <button id="restart-quiz">Take New Quiz</button>
+            </div>
+        </div>
+    </section>
+
+    <nav class="page-nav" style="background: var(--dark);">
+        <div class="nav-content">
+            <a href="after.html" class="prev" style="color: rgba(255,255,255,0.8);">
+                ← After a Flood
+                <span class="nav-label" style="color: rgba(255,255,255,0.5);">Previous</span>
+            </a>
+            <span></span>
+        </div>
+    </nav>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>Flood Safety</h3>
+                <p class="hackathon">Flood-Safety Hackathon Submission</p>
+            </div>
+            <div class="team-info">
+                <div class="team-item">
+                    <span class="team-label">Team</span>
+                    <span class="team-value">Safety Specialists</span>
+                </div>
+                <div class="team-item">
+                    <span class="team-label">School</span>
+                    <span class="team-value">California High</span>
+                </div>
+                <div class="team-item">
+                    <span class="team-label">Grade</span>
+                    <span class="team-value">11</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

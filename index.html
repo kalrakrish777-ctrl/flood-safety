@@ -21,50 +21,60 @@
             background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
             color: white;
             padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         header h1 {
             font-size: 1.8rem;
             margin-bottom: 0.5rem;
+            text-align: center;
         }
 
-        nav {
+        .tabs {
             display: flex;
-            gap: 1.5rem;
+            justify-content: center;
+            gap: 0.5rem;
             flex-wrap: wrap;
+            margin-top: 1rem;
         }
 
-        nav a {
+        .tab-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
             color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background 0.3s;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
         }
 
-        nav a:hover {
+        .tab-btn:hover {
             background: rgba(255,255,255,0.2);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #1e3a5f;
+            border-color: white;
+            font-weight: bold;
         }
 
         .hero {
             background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
             color: white;
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem;
         }
 
         .hero h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 1rem;
         }
 
         .emergency-box {
@@ -72,61 +82,53 @@
             border: 2px solid white;
             border-radius: 8px;
             padding: 1rem;
-            margin-top: 1.5rem;
             display: inline-block;
         }
 
         .emergency-box strong {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
-        section {
-            padding: 3rem 2rem;
+        main {
             max-width: 900px;
             margin: 0 auto;
+            padding: 2rem;
         }
 
-        .section-before {
-            background: linear-gradient(180deg, #ebf8ff 0%, #bee3f8 100%);
+        .tab-content {
+            display: none;
         }
 
-        .section-during {
-            background: linear-gradient(180deg, #fffaf0 0%, #feebc8 100%);
+        .tab-content.active {
+            display: block;
         }
 
-        .section-after {
-            background: linear-gradient(180deg, #f0fff4 0%, #c6f6d5 100%);
-        }
-
-        .section-quiz {
-            background: linear-gradient(180deg, #e9d8fd 0%, #d6bcfa 100%);
-        }
-
-        section h2 {
-            font-size: 1.8rem;
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid;
         }
 
-        .section-before h2 {
-            color: #2b6cb0;
-            border-color: #2b6cb0;
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
         }
 
-        .section-during h2 {
-            color: #c05621;
-            border-color: #dd6b20;
-        }
+        .icon-before { background: #2b6cb0; }
+        .icon-during { background: #dd6b20; }
+        .icon-after { background: #38a169; }
+        .icon-quiz { background: #805ad5; }
 
-        .section-after h2 {
-            color: #276749;
-            border-color: #38a169;
-        }
-
-        .section-quiz h2 {
-            color: #6b46c1;
-            border-color: #805ad5;
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
         }
 
         .checklist {
@@ -146,36 +148,12 @@
             font-weight: bold;
         }
 
-        .section-before .checklist li::before {
-            color: #2b6cb0;
-        }
-
-        .section-during .checklist li::before {
-            color: #dd6b20;
-        }
-
-        .section-after .checklist li::before {
-            color: #38a169;
-        }
-
         .tip-box {
             background: white;
             border-left: 4px solid;
             padding: 1rem;
             margin: 1.5rem 0;
             border-radius: 0 4px 4px 0;
-        }
-
-        .section-before .tip-box {
-            border-color: #2b6cb0;
-        }
-
-        .section-during .tip-box {
-            border-color: #dd6b20;
-        }
-
-        .section-after .tip-box {
-            border-color: #38a169;
         }
 
         .tip-box strong {
@@ -193,15 +171,11 @@
         }
 
         .quiz-intro {
-            background: white;
+            background: #e9d8fd;
             padding: 1.5rem;
             border-radius: 8px;
-            margin-bottom: 2rem;
             text-align: center;
-        }
-
-        .quiz-intro p {
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
         .quiz-question {
@@ -209,7 +183,7 @@
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            border-left: 4px solid #805ad5;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .quiz-question h3 {
@@ -261,6 +235,27 @@
 
         .quiz-options label.disabled {
             pointer-events: none;
+        }
+
+        .check-btn {
+            background: #805ad5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .check-btn:hover {
+            background: #6b46c1;
+        }
+
+        .check-btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
         }
 
         .feedback {
@@ -337,6 +332,7 @@
             color: white;
             text-align: center;
             padding: 2rem;
+            margin-top: 2rem;
         }
 
         footer h3 {
@@ -361,20 +357,17 @@
                 font-size: 1.4rem;
             }
 
-            nav {
-                gap: 0.5rem;
-            }
-
-            section {
-                padding: 2rem 1rem;
-            }
-
-            .hero {
-                padding: 2rem 1rem;
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
             }
 
             .hero h2 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+            }
+
+            main {
+                padding: 1rem;
             }
         }
     </style>
@@ -382,11 +375,12 @@
 <body>
     <header>
         <h1>Flood Safety</h1>
-        <nav>
-            <a href="#before">Before a Flood</a>
-            <a href="#during">During a Flood</a>
-            <a href="#after">After a Flood</a>
-            <a href="#quiz">Quiz</a>
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="openTab('home')">Home</button>
+            <button class="tab-btn" onclick="openTab('before')">Before</button>
+            <button class="tab-btn" onclick="openTab('during')">During</button>
+            <button class="tab-btn" onclick="openTab('after')">After</button>
+            <button class="tab-btn" onclick="openTab('quiz')">Quiz</button>
         </nav>
     </header>
 
@@ -400,148 +394,125 @@
         </div>
     </div>
 
-    <section id="before" class="section-before">
-        <h2>Before a Flood</h2>
-        <p>Preparation is key. Take these steps before flooding occurs to keep your family safe.</p>
-        
-        <ul class="checklist">
-            <li><strong>Build an emergency kit</strong> with water (1 gallon per person per day), non-perishable food, flashlight, batteries, first aid supplies, and medications.</li>
-            <li><strong>Create a family communication plan</strong> with meeting points and emergency contacts written down and shared with all family members.</li>
-            <li><strong>Know your evacuation routes</strong> - identify high ground locations and practice reaching them from your home.</li>
-            <li><strong>Protect important documents</strong> by placing them in waterproof bags or storing digital copies in cloud storage.</li>
-            <li><strong>Elevate utilities</strong> - move electrical panels, furnaces, and water heaters to higher floors if possible.</li>
-            <li><strong>Sign up for emergency alerts</strong> through your local government notification system.</li>
-            <li><strong>Clear gutters and drains</strong> around your property to allow water to flow away from your home.</li>
-        </ul>
-
-        <div class="tip-box">
-            <strong>Pro Tip: Important Documents</strong>
-            Keep copies of insurance policies, identification, bank records, and medical information in a secure, waterproof location.
-        </div>
-    </section>
-
-    <section id="during" class="section-during">
-        <h2>During a Flood</h2>
-        <p>When flooding occurs, act quickly and stay calm. Your decisions matter.</p>
-
-        <ul class="checklist">
-            <li><strong>Move to higher ground immediately</strong> - go to the highest level of your home or a neighbor's if needed.</li>
-            <li><strong>Never walk, swim, or drive through flood waters</strong> - just 6 inches of moving water can knock you down, and 12 inches can sweep a car away.</li>
-            <li><strong>Listen to emergency broadcasts</strong> - TV, radio, or NOAA Weather Radio for updates and instructions.</li>
-            <li><strong>Turn off utilities</strong> if instructed and if you can do so safely without standing in water.</li>
-            <li><strong>Avoid bridges over fast-moving water</strong> - find alternate routes or wait for rescue if trapped.</li>
-            <li><strong>Stay inside until officially declared safe</strong> - even if the rain stops, flooding can continue for hours.</li>
-        </ul>
-
-        <div class="tip-box warning">
-            <strong>WARNING: Never Drive Through Flood Water</strong>
-            Most flood deaths occur in vehicles. If your car stalls in rising water, abandon it immediately and move to higher ground.
-        </div>
-    </section>
-
-    <section id="after" class="section-after">
-        <h2>After a Flood</h2>
-        <p>The danger isn't over when the water recedes. Follow these steps for safe recovery.</p>
-
-        <ul class="checklist">
-            <li><strong>Return home only when authorities say it's safe</strong> - check for structural damage before entering.</li>
-            <li><strong>Wear protective gear</strong> including boots, gloves, and masks when cleaning - flood water may contain sewage and chemicals.</li>
-            <li><strong>Document all damage</strong> with photos and videos before starting cleanup for insurance purposes.</li>
-            <li><strong>Discard food and water</strong> that may have come into contact with flood water - when in doubt, throw it out.</li>
-            <li><strong>Ventilate and dry your home</strong> - open doors and windows, use fans and dehumidifiers to prevent mold.</li>
-            <li><strong>Check for gas leaks</strong> - if you smell gas or hear hissing, leave immediately and call the gas company.</li>
-            <li><strong>Contact your insurance company</strong> as soon as possible to start the claims process.</li>
-            <li><strong>Seek medical attention</strong> for any injuries, and watch for signs of infection or illness.</li>
-        </ul>
-
-        <div class="tip-box">
-            <strong>Recovery Tip: Watch for Mold</strong>
-            Mold can begin growing within 24-48 hours. Dry out your home quickly and clean all surfaces with a bleach solution (1 cup bleach per gallon of water).
-        </div>
-    </section>
-
-    <section id="quiz" class="section-quiz">
-        <h2>Test Your Knowledge</h2>
-        <p>See how much you've learned about flood safety! Answer these questions based on the information above.</p>
-
-        <div class="quiz-intro">
-            <p>Select the correct answer for each question and click "Check Answer" to see your results.</p>
-        </div>
-
-        <div id="quiz-container">
-            <div class="quiz-question" data-correct="b">
-                <h3>Question 1 of 5</h3>
-                <p>How much water is needed per person per day in an emergency kit?</p>
-                <div class="quiz-options">
-                    <label><input type="radio" name="q1" value="a"> A) Half a gallon</label>
-                    <label><input type="radio" name="q1" value="b"> B) 1 gallon</label>
-                    <label><input type="radio" name="q1" value="c"> C) 2 gallons</label>
-                    <label><input type="radio" name="q1" value="d"> D) 5 gallons</label>
+    <main>
+        <div id="home" class="tab-content active">
+            <h2>Welcome to Flood Safety</h2>
+            <p>This website teaches you how to stay safe before, during, and after a flood. Use the tabs above to navigate through each section.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                <div class="tip-box" style="border-color: #2b6cb0; text-align: center;">
+                    <strong style="color: #2b6cb0; font-size: 1.2rem;">Before</strong>
+                    <p>Prepare your family and home before flooding occurs.</p>
+                    <button class="check-btn" style="background: #2b6cb0; margin-top: 1rem;" onclick="openTab('before')">Learn More</button>
                 </div>
-                <button class="check-btn" onclick="checkAnswer(1)">Check Answer</button>
-                <div class="feedback"></div>
-            </div>
-
-            <div class="quiz-question" data-correct="c">
-                <h3>Question 2 of 5</h3>
-                <p>How many inches of moving flood water can sweep a car away?</p>
-                <div class="quiz-options">
-                    <label><input type="radio" name="q2" value="a"> A) 6 inches</label>
-                    <label><input type="radio" name="q2" value="b"> B) 8 inches</label>
-                    <label><input type="radio" name="q2" value="c"> C) 12 inches</label>
-                    <label><input type="radio" name="q2" value="d"> D) 18 inches</label>
+                <div class="tip-box" style="border-color: #dd6b20; text-align: center;">
+                    <strong style="color: #dd6b20; font-size: 1.2rem;">During</strong>
+                    <p>Stay safe and make smart decisions during a flood.</p>
+                    <button class="check-btn" style="background: #dd6b20; margin-top: 1rem;" onclick="openTab('during')">Learn More</button>
                 </div>
-                <button class="check-btn" onclick="checkAnswer(2)">Check Answer</button>
-                <div class="feedback"></div>
-            </div>
-
-            <div class="quiz-question" data-correct="a">
-                <h3>Question 3 of 5</h3>
-                <p>How quickly can mold begin growing after a flood?</p>
-                <div class="quiz-options">
-                    <label><input type="radio" name="q3" value="a"> A) Within 24-48 hours</label>
-                    <label><input type="radio" name="q3" value="b"> B) Within 1 week</label>
-                    <label><input type="radio" name="q3" value="c"> C) Within 2 weeks</label>
-                    <label><input type="radio" name="q3" value="d"> D) Within 1 month</label>
+                <div class="tip-box" style="border-color: #38a169; text-align: center;">
+                    <strong style="color: #38a169; font-size: 1.2rem;">After</strong>
+                    <p>Recover safely and document damage for insurance.</p>
+                    <button class="check-btn" style="background: #38a169; margin-top: 1rem;" onclick="openTab('after')">Learn More</button>
                 </div>
-                <button class="check-btn" onclick="checkAnswer(3)">Check Answer</button>
-                <div class="feedback"></div>
-            </div>
-
-            <div class="quiz-question" data-correct="d">
-                <h3>Question 4 of 5</h3>
-                <p>What should you do FIRST when returning home after a flood?</p>
-                <div class="quiz-options">
-                    <label><input type="radio" name="q4" value="a"> A) Start cleaning immediately</label>
-                    <label><input type="radio" name="q4" value="b"> B) Open all windows</label>
-                    <label><input type="radio" name="q4" value="c"> C) Turn on all lights</label>
-                    <label><input type="radio" name="q4" value="d"> D) Return only when authorities say it's safe</label>
+                <div class="tip-box" style="border-color: #805ad5; text-align: center;">
+                    <strong style="color: #805ad5; font-size: 1.2rem;">Quiz</strong>
+                    <p>Test your knowledge with our interactive quiz!</p>
+                    <button class="check-btn" style="background: #805ad5; margin-top: 1rem;" onclick="openTab('quiz')">Start Quiz</button>
                 </div>
-                <button class="check-btn" onclick="checkAnswer(4)">Check Answer</button>
-                <div class="feedback"></div>
-            </div>
-
-            <div class="quiz-question" data-correct="b">
-                <h3>Question 5 of 5</h3>
-                <p>How much bleach should you use per gallon of water to clean flood-damaged surfaces?</p>
-                <div class="quiz-options">
-                    <label><input type="radio" name="q5" value="a"> A) Half a cup</label>
-                    <label><input type="radio" name="q5" value="b"> B) 1 cup</label>
-                    <label><input type="radio" name="q5" value="c"> C) 2 cups</label>
-                    <label><input type="radio" name="q5" value="d"> D) A few drops</label>
-                </div>
-                <button class="check-btn" onclick="checkAnswer(5)">Check Answer</button>
-                <div class="feedback"></div>
             </div>
         </div>
 
-        <div class="quiz-results" id="quiz-results">
-            <h3>Quiz Complete!</h3>
-            <div class="score"><span id="score">0</span>/5</div>
-            <p id="score-message"></p>
-            <button id="restart-quiz" onclick="restartQuiz()">Take Quiz Again</button>
+        <div id="before" class="tab-content">
+            <div class="section-header">
+                <div class="section-icon icon-before">!</div>
+                <h2 style="color: #2b6cb0; margin: 0;">Before a Flood</h2>
+            </div>
+            <p>Preparation is key. Take these steps before flooding occurs to keep your family safe.</p>
+            
+            <ul class="checklist" style="color: #2b6cb0;">
+                <li><strong>Build an emergency kit</strong> with water (1 gallon per person per day), non-perishable food, flashlight, batteries, first aid supplies, and medications.</li>
+                <li><strong>Create a family communication plan</strong> with meeting points and emergency contacts written down and shared with all family members.</li>
+                <li><strong>Know your evacuation routes</strong> - identify high ground locations and practice reaching them from your home.</li>
+                <li><strong>Protect important documents</strong> by placing them in waterproof bags or storing digital copies in cloud storage.</li>
+                <li><strong>Elevate utilities</strong> - move electrical panels, furnaces, and water heaters to higher floors if possible.</li>
+                <li><strong>Sign up for emergency alerts</strong> through your local government notification system.</li>
+                <li><strong>Clear gutters and drains</strong> around your property to allow water to flow away from your home.</li>
+            </ul>
+
+            <div class="tip-box" style="border-color: #2b6cb0;">
+                <strong>Pro Tip: Important Documents</strong>
+                Keep copies of insurance policies, identification, bank records, and medical information in a secure, waterproof location.
+            </div>
         </div>
-    </section>
+
+        <div id="during" class="tab-content">
+            <div class="section-header">
+                <div class="section-icon icon-during">!</div>
+                <h2 style="color: #c05621; margin: 0;">During a Flood</h2>
+            </div>
+            <p>When flooding occurs, act quickly and stay calm. Your decisions matter.</p>
+
+            <ul class="checklist" style="color: #dd6b20;">
+                <li><strong>Move to higher ground immediately</strong> - go to the highest level of your home or a neighbor's if needed.</li>
+                <li><strong>Never walk, swim, or drive through flood waters</strong> - just 6 inches of moving water can knock you down, and 12 inches can sweep a car away.</li>
+                <li><strong>Listen to emergency broadcasts</strong> - TV, radio, or NOAA Weather Radio for updates and instructions.</li>
+                <li><strong>Turn off utilities</strong> if instructed and if you can do so safely without standing in water.</li>
+                <li><strong>Avoid bridges over fast-moving water</strong> - find alternate routes or wait for rescue if trapped.</li>
+                <li><strong>Stay inside until officially declared safe</strong> - even if the rain stops, flooding can continue for hours.</li>
+            </ul>
+
+            <div class="tip-box warning">
+                <strong>WARNING: Never Drive Through Flood Water</strong>
+                Most flood deaths occur in vehicles. If your car stalls in rising water, abandon it immediately and move to higher ground.
+            </div>
+        </div>
+
+        <div id="after" class="tab-content">
+            <div class="section-header">
+                <div class="section-icon icon-after">!</div>
+                <h2 style="color: #276749; margin: 0;">After a Flood</h2>
+            </div>
+            <p>The danger isn't over when the water recedes. Follow these steps for safe recovery.</p>
+
+            <ul class="checklist" style="color: #38a169;">
+                <li><strong>Return home only when authorities say it's safe</strong> - check for structural damage before entering.</li>
+                <li><strong>Wear protective gear</strong> including boots, gloves, and masks when cleaning - flood water may contain sewage and chemicals.</li>
+                <li><strong>Document all damage</strong> with photos and videos before starting cleanup for insurance purposes.</li>
+                <li><strong>Discard food and water</strong> that may have come into contact with flood water - when in doubt, throw it out.</li>
+                <li><strong>Ventilate and dry your home</strong> - open doors and windows, use fans and dehumidifiers to prevent mold.</li>
+                <li><strong>Check for gas leaks</strong> - if you smell gas or hear hissing, leave immediately and call the gas company.</li>
+                <li><strong>Contact your insurance company</strong> as soon as possible to start the claims process.</li>
+                <li><strong>Seek medical attention</strong> for any injuries, and watch for signs of infection or illness.</li>
+            </ul>
+
+            <div class="tip-box" style="border-color: #38a169;">
+                <strong>Recovery Tip: Watch for Mold</strong>
+                Mold can begin growing within 24-48 hours. Dry out your home quickly and clean all surfaces with a bleach solution (1 cup bleach per gallon of water).
+            </div>
+        </div>
+
+        <div id="quiz" class="tab-content">
+            <div class="section-header">
+                <div class="section-icon icon-quiz">?</div>
+                <h2 style="color: #6b46c1; margin: 0;">Test Your Knowledge</h2>
+            </div>
+
+            <div class="quiz-intro">
+                <p>See how much you've learned about flood safety! Answer these questions and click "Check Answer" to see your results.</p>
+                <p><strong>Questions are randomly selected each time you refresh!</strong></p>
+            </div>
+
+            <div id="quiz-container"></div>
+
+            <div class="quiz-results" id="quiz-results">
+                <h3>Quiz Complete!</h3>
+                <div class="score"><span id="score">0</span>/5</div>
+                <p id="score-message"></p>
+                <button id="restart-quiz" onclick="generateQuiz()">Take New Quiz</button>
+            </div>
+        </div>
+    </main>
 
     <footer>
         <h3>Flood-Safety Hackathon Submission</h3>
@@ -553,11 +524,157 @@
     </footer>
 
     <script>
+        const allQuestions = [
+            {
+                question: "How much water is needed per person per day in an emergency kit?",
+                options: ["Half a gallon", "1 gallon", "2 gallons", "5 gallons"],
+                correct: 1,
+                topic: "Before"
+            },
+            {
+                question: "How many inches of moving flood water can sweep a car away?",
+                options: ["6 inches", "8 inches", "12 inches", "18 inches"],
+                correct: 2,
+                topic: "During"
+            },
+            {
+                question: "How quickly can mold begin growing after a flood?",
+                options: ["Within 24-48 hours", "Within 1 week", "Within 2 weeks", "Within 1 month"],
+                correct: 0,
+                topic: "After"
+            },
+            {
+                question: "What should you do FIRST when returning home after a flood?",
+                options: ["Start cleaning immediately", "Open all windows", "Turn on all lights", "Return only when authorities say it's safe"],
+                correct: 3,
+                topic: "After"
+            },
+            {
+                question: "How much bleach should you use per gallon of water to clean flood-damaged surfaces?",
+                options: ["Half a cup", "1 cup", "2 cups", "A few drops"],
+                correct: 1,
+                topic: "After"
+            },
+            {
+                question: "How much running water can knock a person down?",
+                options: ["2 inches", "4 inches", "6 inches", "10 inches"],
+                correct: 2,
+                topic: "During"
+            },
+            {
+                question: "What should you include in your family communication plan?",
+                options: ["Only phone numbers", "Meeting points and emergency contacts", "Only email addresses", "Social media passwords"],
+                correct: 1,
+                topic: "Before"
+            },
+            {
+                question: "Why should you avoid bridges over fast-moving water?",
+                options: ["They might be closed", "Traffic is heavy", "They can collapse from water force", "They're hard to see"],
+                correct: 2,
+                topic: "During"
+            },
+            {
+                question: "What is a key step to protect important documents before a flood?",
+                options: ["Hide them under your bed", "Place them in waterproof bags or cloud storage", "Give them to your neighbor", "Put them in the freezer"],
+                correct: 1,
+                topic: "Before"
+            },
+            {
+                question: "What should you do if you smell gas after a flood?",
+                options: ["Open windows", "Turn on lights", "Leave immediately and call the gas company", "Light a candle"],
+                correct: 2,
+                topic: "After"
+            },
+            {
+                question: "What does signing up for emergency alerts help you do?",
+                options: ["Get discounts", "Receive early warning notifications", "Find new friends", "Win prizes"],
+                correct: 1,
+                topic: "Before"
+            },
+            {
+                question: "Why is flood water dangerous even after the rain stops?",
+                options: ["It attracts snakes", "Flooding can continue for hours", "It makes roads slippery", "It attracts mosquitoes"],
+                correct: 1,
+                topic: "During"
+            },
+            {
+                question: "What protective gear should you wear when cleaning after a flood?",
+                options: ["Swimsuit and sandals", "Boots, gloves, and masks", "Just gloves", "Nothing special"],
+                correct: 1,
+                topic: "After"
+            },
+            {
+                question: "Where should you move electrical panels, furnaces, and water heaters?",
+                options: ["Basement", "Attic", "Higher floors", "Garage"],
+                correct: 2,
+                topic: "Before"
+            },
+            {
+                question: "Why is documenting flood damage important?",
+                options: ["For social media", "For insurance claims", "To show friends", "To remember the event"],
+                correct: 1,
+                topic: "After"
+            }
+        ];
+
+        let selectedQuestions = [];
         let correctAnswers = 0;
 
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function generateQuiz() {
+            const container = document.getElementById('quiz-container');
+            const results = document.getElementById('quiz-results');
+            correctAnswers = 0;
+            
+            selectedQuestions = shuffleArray(allQuestions).slice(0, 5);
+            container.innerHTML = '';
+            results.classList.remove('show');
+
+            selectedQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.dataset.correct = q.correct;
+
+                const optionsHTML = q.options.map((opt, i) => 
+                    `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`
+                ).join('');
+
+                questionDiv.innerHTML = `
+                    <h3>Question ${index + 1} of 5</h3>
+                    <p>${q.question}</p>
+                    <div class="quiz-options">${optionsHTML}</div>
+                    <button class="check-btn" onclick="checkAnswer(${index})">Check Answer</button>
+                    <div class="feedback"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-btn[onclick="openTab('${tabId}')"]`).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'quiz' && selectedQuestions.length === 0) {
+                generateQuiz();
+            }
+        }
+
         function checkAnswer(questionNum) {
-            const question = document.querySelector(`.quiz-question:nth-child(${questionNum})`);
-            const correct = question.dataset.correct;
+            const question = document.querySelector(`.quiz-question:nth-child(${questionNum + 1})`);
+            const correct = parseInt(question.dataset.correct);
             const selected = document.querySelector(`input[name="q${questionNum}"]:checked`);
             const labels = question.querySelectorAll('label');
             const feedback = question.querySelector('.feedback');
@@ -573,24 +690,22 @@
             button.disabled = true;
             button.style.background = '#a0aec0';
 
-            if (selected.value === correct) {
+            const selectedIndex = parseInt(selected.value);
+
+            if (selectedIndex === correct) {
                 selected.parentElement.classList.add('correct');
                 feedback.textContent = "Correct! Great job!";
                 feedback.className = "feedback show correct";
                 correctAnswers++;
             } else {
                 selected.parentElement.classList.add('incorrect');
-                labels.forEach(label => {
-                    if (label.querySelector('input').value === correct) {
-                        label.classList.add('correct');
-                    }
-                });
+                labels[correct].classList.add('correct');
                 feedback.textContent = "Incorrect. The correct answer is highlighted in green.";
                 feedback.className = "feedback show incorrect";
             }
 
-            const allAnswered = document.querySelectorAll('.quiz-question').length === document.querySelectorAll('.check-btn:disabled').length;
-            if (allAnswered) {
+            const answeredCount = document.querySelectorAll('.check-btn:disabled').length;
+            if (answeredCount === 5) {
                 showResults();
             }
         }
@@ -616,29 +731,7 @@
             results.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function restartQuiz() {
-            correctAnswers = 0;
-            const questions = document.querySelectorAll('.quiz-question');
-            const results = document.getElementById('quiz-results');
-
-            questions.forEach(question => {
-                const labels = question.querySelectorAll('label');
-                const button = question.querySelector('.check-btn');
-                const feedback = question.querySelector('.feedback');
-                const radios = question.querySelectorAll('input[type="radio"]');
-
-                labels.forEach(label => {
-                    label.classList.remove('correct', 'incorrect', 'disabled');
-                });
-                radios.forEach(radio => radio.checked = false);
-                button.disabled = false;
-                button.style.background = '#805ad5';
-                feedback.className = 'feedback';
-            });
-
-            results.classList.remove('show');
-            window.scrollTo({ top: document.getElementById('quiz').offsetTop, behavior: 'smooth' });
-        }
+        generateQuiz();
     </script>
 </body>
 </html>

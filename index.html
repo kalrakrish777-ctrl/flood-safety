@@ -7,11 +7,747 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --bg: #FAFAF8;
+            --text: #1A1A1A;
+            --text-light: #6B6B6B;
+            --accent: #C45D3A;
+            --accent-light: #E8D5CF;
+            --cream: #F5F3EF;
+            --dark: #2D2D2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--bg);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .logo span {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        nav {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        nav a {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--text);
+            background: var(--cream);
+        }
+
+        nav a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 0.1em;
+            left: 0;
+            width: 100%;
+            height: 0.08em;
+            background: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 540px;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        /* Emergency Card */
+        .emergency-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--dark);
+            color: white;
+            padding: 1.25rem 2rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emergency-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .emergency-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .emergency-card .icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+        }
+
+        .emergency-card .content {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .emergency-card .item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .emergency-card .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            margin-bottom: 0.25rem;
+        }
+
+        .emergency-card .value {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: var(--cream);
+            padding: 6rem 2rem;
+        }
+
+        .timeline-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .timeline-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .timeline-header .subtitle {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .timeline {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            display: block;
+            cursor: pointer;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .timeline-item .number {
+            font-family: 'Space Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .desc {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item .check-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .timeline-item .check-btn:hover {
+            background: #a84d2e;
+        }
+
+        /* Tab Content Sections */
+        .tab-section {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .tab-section .section-intro {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .checklist li {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .checklist li:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transform: translateX(4px);
+        }
+
+        .checklist .num {
+            font-family: 'Space Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+
+        .checklist .text strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .checklist .text span {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: var(--cream);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            margin-top: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-box strong {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box.warning {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .tip-box.warning strong {
+            color: #dc2626;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            min-height: 80vh;
+            display: none;
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        .quiz-section .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-section .section-intro {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .quiz-question {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-question h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-question p {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-options label {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .quiz-options label:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .quiz-options input {
+            margin-right: 1rem;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .quiz-options label.correct {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+
+        .quiz-options label.incorrect {
+            background: rgba(229, 57, 53, 0.2);
+            border-color: #e53935;
+        }
+
+        .quiz-options label.disabled {
+            pointer-events: none;
+        }
+
+        .check-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 1.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .check-btn:hover {
+            background: #a84d2e;
+            transform: translateY(-1px);
+        }
+
+        .check-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .feedback {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback.correct {
+            background: rgba(76, 175, 80, 0.2);
+            color: #81c784;
+        }
+
+        .feedback.incorrect {
+            background: rgba(229, 57, 53, 0.2);
+            color: #e57373;
+        }
+
+        .quiz-results {
+            background: var(--accent);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .quiz-results.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .quiz-results h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-results .score {
+            font-family: 'Space Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+        }
+
+        .quiz-results p {
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        #restart-quiz {
+            background: white;
+            color: var(--dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        #restart-quiz:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            border-top: 1px solid #eee;
+            padding: 4rem 2rem;
+        }
+
+        footer .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        footer .team-info {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        footer .team-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer .team-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        footer .team-value {
+            font-weight: 600;
+        }
+
+        footer .hackathon {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timeline {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 2rem 1.5rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .emergency-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .emergency-card .content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .tab-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .tab-section h2 {
+                font-size: 2rem;
+            }
+
+            .checklist li {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .checklist .num {
+                font-size: 1.5rem;
+            }
+
+            .quiz-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .quiz-section h2 {
+                font-size: 2rem;
+            }
+
+            footer .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            footer .team-info {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo">
+        <a href="#" class="logo" onclick="openTab('home'); return false;">
             <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18 3C18 3 6 14 6 22C6 27.5228 10.4772 32 18 32C25.5228 32 30 27.5228 30 22C30 14 18 3 18 3Z" fill="#C45D3A"/>
                 <path d="M18 8C18 8 10 16 10 21C10 24.3137 13.6863 27 18 27" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -19,98 +755,275 @@
             <span>Flood Safety</span>
         </a>
         <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="before.html">Before</a>
-            <a href="during.html">During</a>
-            <a href="after.html">After</a>
-            <a href="quiz.html">Quiz</a>
+            <a href="#" class="active" onclick="openTab('home'); return false;">Home</a>
+            <a href="#" onclick="openTab('before'); return false;">Before</a>
+            <a href="#" onclick="openTab('during'); return false;">During</a>
+            <a href="#" onclick="openTab('after'); return false;">After</a>
+            <a href="#" onclick="openTab('quiz'); return false;">Quiz</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Flood<br>Safety<br><span class="accent">Guide</span></h1>
-            <p>A practical guide to keeping your family safe before, during, and after flooding. Simple steps that save lives.</p>
+    <!-- Home Tab -->
+    <div id="home" class="tab-section active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Flood<br>Safety<br><span class="accent">Guide</span></h1>
+                <p>A practical guide to keeping your family safe before, during, and after flooding. Simple steps that save lives.</p>
+                
+                <div class="emergency-card">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <div class="content">
+                        <div class="item">
+                            <span class="label">Emergency</span>
+                            <span class="value">911</span>
+                        </div>
+                        <div class="item">
+                            <span class="label">FEMA Hotline</span>
+                            <span class="value">1-800-621-3362</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <div class="timeline-header">
+                <h2>3 Phases of Safety</h2>
+                <span class="subtitle">From preparation to recovery</span>
+            </div>
             
-            <div class="emergency-card">
-                <div class="icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                    </svg>
+            <div class="timeline">
+                <div class="timeline-item" onclick="openTab('before')">
+                    <span class="number">01</span>
+                    <h3>Before</h3>
+                    <p class="desc">Prepare your home and family before disaster strikes.</p>
+                    <button class="check-btn">View Checklist</button>
                 </div>
-                <div class="content">
-                    <div class="item">
-                        <span class="label">Emergency</span>
-                        <span class="value">911</span>
-                    </div>
-                    <div class="item">
-                        <span class="label">FEMA Hotline</span>
-                        <span class="value">1-800-621-3362</span>
-                    </div>
+                <div class="timeline-item" onclick="openTab('during')">
+                    <span class="number">02</span>
+                    <h3>During</h3>
+                    <p class="desc">Stay calm and make smart decisions when flooding occurs.</p>
+                    <button class="check-btn">View Checklist</button>
+                </div>
+                <div class="timeline-item" onclick="openTab('after')">
+                    <span class="number">03</span>
+                    <h3>After</h3>
+                    <p class="desc">Recover safely and document damage for insurance.</p>
+                    <button class="check-btn">View Checklist</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <section class="timeline-section">
-        <div class="timeline-header">
-            <h2>3 Phases of Safety</h2>
-            <span class="subtitle">From preparation to recovery</span>
-        </div>
+    <!-- Before Tab -->
+    <div id="before" class="tab-section">
+        <h2>Before a Flood</h2>
+        <p class="section-intro">Preparation is your best defense. Take these steps before flooding occurs to protect your family and property.</p>
         
-        <div class="timeline">
-            <a href="before.html" class="timeline-item">
-                <span class="number">01</span>
-                <h3>Before</h3>
-                <p class="desc">Prepare your home and family before disaster strikes.</p>
-                <button class="check-btn">View Checklist</button>
-            </a>
-            <a href="during.html" class="timeline-item">
-                <span class="number">02</span>
-                <h3>During</h3>
-                <p class="desc">Stay calm and make smart decisions when flooding occurs.</p>
-                <button class="check-btn">View Checklist</button>
-            </a>
-            <a href="after.html" class="timeline-item">
-                <span class="number">03</span>
-                <h3>After</h3>
-                <p class="desc">Recover safely and document damage for insurance.</p>
-                <button class="check-btn">View Checklist</button>
-            </a>
-        </div>
-    </section>
+        <ul class="checklist">
+            <li>
+                <span class="num">01</span>
+                <div class="text">
+                    <strong>Build an Emergency Kit</strong>
+                    <span>Water (1 gallon per person per day), non-perishable food, flashlight, batteries, first aid supplies, and medications.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">02</span>
+                <div class="text">
+                    <strong>Create a Family Communication Plan</strong>
+                    <span>Establish meeting points and emergency contacts. Write them down and share with all family members.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">03</span>
+                <div class="text">
+                    <strong>Know Your Evacuation Routes</strong>
+                    <span>Identify high ground locations and practice reaching them from your home before an emergency.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">04</span>
+                <div class="text">
+                    <strong>Protect Important Documents</strong>
+                    <span>Store copies of insurance policies, identification, and bank records in waterproof bags or cloud storage.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">05</span>
+                <div class="text">
+                    <strong>Elevate Utilities</strong>
+                    <span>Move electrical panels, furnaces, and water heaters to higher floors when possible.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">06</span>
+                <div class="text">
+                    <strong>Sign Up for Emergency Alerts</strong>
+                    <span>Register for local government notification systems to receive early warnings.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">07</span>
+                <div class="text">
+                    <strong>Clear Gutters and Drains</strong>
+                    <span>Remove debris from around your property to allow water to flow away from your home.</span>
+                </div>
+            </li>
+        </ul>
 
-    <section class="features-section">
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
+        <div class="tip-box">
+            <strong>Pro Tip</strong>
+            Keep copies of medical records, insurance policies, and identification in a secure, waterproof location. Digital copies in cloud storage are also recommended.
+        </div>
+    </div>
+
+    <!-- During Tab -->
+    <div id="during" class="tab-section">
+        <h2>During a Flood</h2>
+        <p class="section-intro">When flooding occurs, act quickly and stay calm. Your decisions in these moments can save lives.</p>
+        
+        <ul class="checklist">
+            <li>
+                <span class="num">01</span>
+                <div class="text">
+                    <strong>Move to Higher Ground</strong>
+                    <span>Go to the highest level of your home or a neighbor's immediately. Do not wait for instructions.</span>
                 </div>
-                <h3>Clear Instructions</h3>
-                <p>Simple, actionable steps that anyone can follow regardless of experience.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                    </svg>
+            </li>
+            <li>
+                <span class="num">02</span>
+                <div class="text">
+                    <strong>Never Enter Flood Waters</strong>
+                    <span>Just 6 inches of moving water can knock you down. 12 inches can sweep a car away. Stay out of all standing water.</span>
                 </div>
-                <h3>Test Your Knowledge</h3>
-                <p>Interactive quiz with random questions to reinforce what you've learned.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
+            </li>
+            <li>
+                <span class="num">03</span>
+                <div class="text">
+                    <strong>Listen to Emergency Broadcasts</strong>
+                    <span>Monitor TV, radio, or NOAA Weather Radio for updates and official instructions.</span>
                 </div>
-                <h3>Always Accessible</h3>
-                <p>Works offline after loading. Keep the tab open for quick reference.</p>
+            </li>
+            <li>
+                <span class="num">04</span>
+                <div class="text">
+                    <strong>Turn Off Utilities</strong>
+                    <span>If instructed and safe to do so, turn off electricity, gas, and water at the main switches.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">05</span>
+                <div class="text">
+                    <strong>Avoid Bridges Over Water</strong>
+                    <span>They can collapse from water force. Find alternate routes or wait for rescue if trapped.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">06</span>
+                <div class="text">
+                    <strong>Stay Put Until Declared Safe</strong>
+                    <span>Even if rain stops, flooding can continue for hours. Wait for official all-clear.</span>
+                </div>
+            </li>
+        </ul>
+
+        <div class="tip-box warning">
+            <strong>Warning</strong>
+            Most flood deaths occur in vehicles. If your car stalls in rising water, abandon it immediately and move to higher ground.
+        </div>
+    </div>
+
+    <!-- After Tab -->
+    <div id="after" class="tab-section">
+        <h2>After a Flood</h2>
+        <p class="section-intro">The danger isn't over when the water recedes. Follow these steps for safe recovery.</p>
+        
+        <ul class="checklist">
+            <li>
+                <span class="num">01</span>
+                <div class="text">
+                    <strong>Wait for Official Clearance</strong>
+                    <span>Return home only when authorities say it's safe. Check for structural damage before entering.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">02</span>
+                <div class="text">
+                    <strong>Wear Protective Gear</strong>
+                    <span>Boots, gloves, and masks are essential. Flood water contains sewage and chemicals.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">03</span>
+                <div class="text">
+                    <strong>Document Everything</strong>
+                    <span>Take photos and videos of all damage before cleanup. This is critical for insurance claims.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">04</span>
+                <div class="text">
+                    <strong>Discard Contaminated Food</strong>
+                    <span>Throw away any food or water that may have contacted flood water. When in doubt, throw it out.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">05</span>
+                <div class="text">
+                    <strong>Dry Your Home Quickly</strong>
+                    <span>Open doors and windows. Use fans and dehumidifiers. Mold grows within 24-48 hours.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">06</span>
+                <div class="text">
+                    <strong>Check for Gas Leaks</strong>
+                    <span>If you smell gas or hear hissing, leave immediately. Call the gas company from outside.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">07</span>
+                <div class="text">
+                    <strong>Contact Your Insurance</strong>
+                    <span>File a claim as soon as possible. Document all communications and keep receipts.</span>
+                </div>
+            </li>
+            <li>
+                <span class="num">08</span>
+                <div class="text">
+                    <strong>Seek Medical Attention</strong>
+                    <span>Get help for injuries. Watch for signs of infection or illness in the following weeks.</span>
+                </div>
+            </li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>Recovery Tip</strong>
+            Mix 1 cup of bleach per gallon of water to clean mold-prone surfaces. Dry everything within 24-48 hours.
+        </div>
+    </div>
+
+    <!-- Quiz Tab -->
+    <div id="quiz" class="quiz-section">
+        <div class="content-wrapper">
+            <h2>Test Your Knowledge</h2>
+            <p class="section-intro">Answer these questions to see how much you've learned. Questions are randomly selected each time you take the quiz.</p>
+
+            <div id="quiz-container"></div>
+
+            <div class="quiz-results" id="quiz-results">
+                <h3>Quiz Complete!</h3>
+                <div class="score"><span id="score">0</span>/5</div>
+                <p id="score-message"></p>
+                <button id="restart-quiz">Take New Quiz</button>
             </div>
         </div>
-    </section>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -135,6 +1048,155 @@
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script>
+        const allQuestions = [
+            { question: "How much water is needed per person per day in an emergency kit?", options: ["Half a gallon", "1 gallon", "2 gallons", "5 gallons"], correct: 1 },
+            { question: "How many inches of moving flood water can sweep a car away?", options: ["6 inches", "8 inches", "12 inches", "18 inches"], correct: 2 },
+            { question: "How quickly can mold begin growing after a flood?", options: ["Within 24-48 hours", "Within 1 week", "Within 2 weeks", "Within 1 month"], correct: 0 },
+            { question: "What should you do FIRST when returning home after a flood?", options: ["Start cleaning immediately", "Open all windows", "Turn on all lights", "Return only when authorities say it's safe"], correct: 3 },
+            { question: "How much bleach should you use per gallon of water to clean surfaces?", options: ["Half a cup", "1 cup", "2 cups", "A few drops"], correct: 1 },
+            { question: "How much running water can knock a person down?", options: ["2 inches", "4 inches", "6 inches", "10 inches"], correct: 2 },
+            { question: "What should you include in your family communication plan?", options: ["Only phone numbers", "Meeting points and emergency contacts", "Only email addresses", "Social media passwords"], correct: 1 },
+            { question: "Why should you avoid bridges over fast-moving water?", options: ["They might be closed", "Traffic is heavy", "They can collapse from water force", "They're hard to see"], correct: 2 },
+            { question: "What is a key step to protect important documents before a flood?", options: ["Hide them under your bed", "Place them in waterproof bags or cloud storage", "Give them to your neighbor", "Put them in the freezer"], correct: 1 },
+            { question: "What should you do if you smell gas after a flood?", options: ["Open windows", "Turn on lights", "Leave immediately and call the gas company", "Light a candle"], correct: 2 },
+            { question: "What does signing up for emergency alerts help you do?", options: ["Get discounts", "Receive early warning notifications", "Find new friends", "Win prizes"], correct: 1 },
+            { question: "Why is flood water dangerous even after the rain stops?", options: ["It attracts snakes", "Flooding can continue for hours", "It makes roads slippery", "It attracts mosquitoes"], correct: 1 },
+            { question: "What protective gear should you wear when cleaning after a flood?", options: ["Swimsuit and sandals", "Boots, gloves, and masks", "Just gloves", "Nothing special"], correct: 1 },
+            { question: "Where should you move electrical panels, furnaces, and water heaters?", options: ["Basement", "Attic", "Higher floors", "Garage"], correct: 2 },
+            { question: "Why is documenting flood damage important?", options: ["For social media", "For insurance claims", "To show friends", "To remember the event"], correct: 1 }
+        ];
+
+        let selectedQuestions = [];
+        let correctAnswers = 0;
+
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-section').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.quiz-section').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(btn => btn.classList.remove('active'));
+            
+            const tab = document.getElementById(tabId);
+            if (tab) {
+                tab.classList.add('active');
+            }
+            
+            document.querySelector(`nav a[onclick="openTab('${tabId}')"]`).classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'quiz' && selectedQuestions.length === 0) {
+                generateQuiz();
+            }
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function generateQuiz() {
+            const container = document.getElementById('quiz-container');
+            const results = document.getElementById('quiz-results');
+            
+            if (!container) return;
+            
+            correctAnswers = 0;
+            
+            selectedQuestions = shuffleArray(allQuestions).slice(0, 5);
+            container.innerHTML = '';
+            results.classList.remove('show');
+
+            selectedQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.dataset.correct = q.correct;
+
+                const optionsHTML = q.options.map((opt, i) => 
+                    `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`
+                ).join('');
+
+                questionDiv.innerHTML = `
+                    <h3>Question ${index + 1}</h3>
+                    <p>${q.question}</p>
+                    <div class="quiz-options">${optionsHTML}</div>
+                    <button class="check-btn" onclick="checkAnswer(${index})">Check Answer</button>
+                    <div class="feedback"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function checkAnswer(questionNum) {
+            const question = document.querySelector(`.quiz-question:nth-child(${questionNum + 1})`);
+            if (!question) return;
+            
+            const correct = parseInt(question.dataset.correct);
+            const selected = document.querySelector(`input[name="q${questionNum}"]:checked`);
+            const labels = question.querySelectorAll('label');
+            const feedback = question.querySelector('.feedback');
+            const button = question.querySelector('.check-btn');
+
+            if (!selected) {
+                feedback.textContent = "Please select an answer first!";
+                feedback.className = "feedback show incorrect";
+                return;
+            }
+
+            labels.forEach(label => label.classList.add('disabled'));
+            button.disabled = true;
+
+            const selectedIndex = parseInt(selected.value);
+
+            if (selectedIndex === correct) {
+                selected.parentElement.classList.add('correct');
+                feedback.textContent = "Correct! Great job!";
+                feedback.className = "feedback show correct";
+                correctAnswers++;
+            } else {
+                selected.parentElement.classList.add('incorrect');
+                labels[correct].classList.add('correct');
+                feedback.textContent = "Incorrect. The correct answer is highlighted.";
+                feedback.className = "feedback show incorrect";
+            }
+
+            const answeredCount = document.querySelectorAll('.check-btn:disabled').length;
+            if (answeredCount === 5) {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const results = document.getElementById('quiz-results');
+            const scoreEl = document.getElementById('score');
+            const messageEl = document.getElementById('score-message');
+
+            if (!results || !scoreEl || !messageEl) return;
+
+            scoreEl.textContent = correctAnswers;
+
+            const messages = [
+                "Keep learning! Read through the tips again.",
+                "Good start! Review the sections to improve.",
+                "Good job! You're getting there.",
+                "Great work! You know your flood safety well.",
+                "Excellent! Almost perfect!",
+                "Perfect score! You're a flood safety expert!"
+            ];
+            messageEl.textContent = messages[correctAnswers];
+
+            results.classList.add('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const restartBtn = document.getElementById('restart-quiz');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', generateQuiz);
+            }
+        });
+    </script>
 </body>
 </html>

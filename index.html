@@ -1239,8 +1239,13 @@
                 tab.classList.add('active');
             }
             
-            var navLink = document.querySelector('nav a[onclick="openTab(\\'' + tabId + '\\')"]');
-            if (navLink) navLink.classList.add('active');
+            // Find and activate the correct nav link
+            for (var m = 0; m < navBtns.length; m++) {
+                if (navBtns[m].getAttribute('onclick').indexOf(tabId) !== -1) {
+                    navBtns[m].classList.add('active');
+                    break;
+                }
+            }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
 

@@ -147,8 +147,9 @@
             font-size: 1.25rem;
             color: var(--text-light);
             max-width: 540px;
-            margin-bottom: 3rem;
+            margin: 0 auto 3rem;
             line-height: 1.7;
+            text-align: center;
         }
 
         /* Emergency Card */
@@ -1123,7 +1124,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (tabId === 'quiz') {
-                setTimeout(generateQuiz, 100);
+                setTimeout(function() {
+                    generateQuiz();
+                }, 150);
             }
         }
 
@@ -1236,13 +1239,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             const restartBtn = document.getElementById('restart-quiz');
             if (restartBtn) {
-                restartBtn.addEventListener('click', generateQuiz);
-            }
-            
-            if (document.getElementById('quiz').classList.contains('active')) {
-                generateQuiz();
+                restartBtn.addEventListener('click', function() {
+                    correctAnswers = 0;
+                    generateQuiz();
+                });
             }
         });
+        
+        // Also generate quiz on page load if quiz tab is visible
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(generateQuiz, 200);
+        }
     </script>
 </body>
 </html>

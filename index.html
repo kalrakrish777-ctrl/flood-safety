@@ -1109,27 +1109,6 @@
         let selectedQuestions = [];
         let correctAnswers = 0;
 
-        function openTab(tabId) {
-            document.querySelectorAll('.tab-section').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.quiz-section').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('nav a').forEach(btn => btn.classList.remove('active'));
-            
-            const tab = document.getElementById(tabId);
-            if (tab) {
-                tab.classList.add('active');
-            }
-            
-            document.querySelector(`nav a[onclick="openTab('${tabId}')"]`).classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (tabId === 'quiz') {
-                setTimeout(function() {
-                    generateQuiz();
-                }, 150);
-            }
-        }
-
         function shuffleArray(array) {
             const shuffled = [...array];
             for (let i = shuffled.length - 1; i > 0; i--) {
@@ -1141,21 +1120,22 @@
 
         function generateQuiz() {
             const results = document.getElementById('quiz-results');
+            if (!results) return;
             
             correctAnswers = 0;
             selectedQuestions = shuffleArray(allQuestions).slice(0, 5);
             results.classList.remove('show');
 
-            selectedQuestions.forEach((q, index) => {
-                const questionDiv = document.getElementById(`q${index + 1}`);
+            selectedQuestions.forEach(function(q, index) {
+                var questionDiv = document.getElementById('q' + (index + 1));
                 if (!questionDiv) return;
                 
                 questionDiv.dataset.correct = q.correct;
                 
-                const promptEl = questionDiv.querySelector('.quiz-prompt');
-                const optionsEl = questionDiv.querySelector('.quiz-options');
-                const feedbackEl = questionDiv.querySelector('.feedback');
-                const buttonEl = questionDiv.querySelector('.check-btn');
+                var promptEl = questionDiv.querySelector('.quiz-prompt');
+                var optionsEl = questionDiv.querySelector('.quiz-options');
+                var feedbackEl = questionDiv.querySelector('.feedback');
+                var buttonEl = questionDiv.querySelector('.check-btn');
                 
                 if (promptEl) promptEl.textContent = q.question;
                 if (feedbackEl) {
@@ -1168,22 +1148,24 @@
                 }
                 
                 if (optionsEl) {
-                    optionsEl.innerHTML = q.options.map((opt, i) => 
-                        `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`
-                    ).join('');
+                    var html = '';
+                    q.options.forEach(function(opt, i) {
+                        html += '<label><input type="radio" name="q' + index + '" value="' + i + '"> ' + opt + '</label>';
+                    });
+                    optionsEl.innerHTML = html;
                 }
             });
         }
 
         function checkAnswer(questionNum) {
-            const question = document.getElementById(`q${questionNum + 1}`);
+            var question = document.getElementById('q' + (questionNum + 1));
             if (!question) return;
             
-            const correct = parseInt(question.dataset.correct);
-            const selected = document.querySelector(`input[name="q${questionNum}"]:checked`);
-            const labels = question.querySelectorAll('label');
-            const feedback = question.querySelector('.feedback');
-            const button = question.querySelector('.check-btn');
+            var correct = parseInt(question.dataset.correct);
+            var selected = document.querySelector('input[name="q' + questionNum + '"]:checked');
+            var labels = question.querySelectorAll('label');
+            var feedback = question.querySelector('.feedback');
+            var button = question.querySelector('.check-btn');
 
             if (!selected) {
                 feedback.textContent = "Please select an answer first!";
@@ -1191,10 +1173,12 @@
                 return;
             }
 
-            labels.forEach(label => label.classList.add('disabled'));
+            for (var i = 0; i < labels.length; i++) {
+                labels[i].classList.add('disabled');
+            }
             if (button) button.disabled = true;
 
-            const selectedIndex = parseInt(selected.value);
+            var selectedIndex = parseInt(selected.value);
 
             if (selectedIndex === correct) {
                 selected.parentElement.classList.add('correct');
@@ -1208,22 +1192,22 @@
                 feedback.className = "feedback show incorrect";
             }
 
-            const answeredCount = document.querySelectorAll('.quiz-section .check-btn:disabled').length;
+            var answeredCount = document.querySelectorAll('.quiz-section .check-btn:disabled').length;
             if (answeredCount === 5) {
                 showResults();
             }
         }
 
         function showResults() {
-            const results = document.getElementById('quiz-results');
-            const scoreEl = document.getElementById('score');
-            const messageEl = document.getElementById('score-message');
+            var results = document.getElementById('quiz-results');
+            var scoreEl = document.getElementById('score');
+            var messageEl = document.getElementById('score-message');
 
             if (!results || !scoreEl || !messageEl) return;
 
             scoreEl.textContent = correctAnswers;
 
-            const messages = [
+            var messages = [
                 "Keep learning! Read through the tips again.",
                 "Good start! Review the sections to improve.",
                 "Good job! You're getting there.",
@@ -1236,19 +1220,49 @@
             results.classList.add('show');
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const restartBtn = document.getElementById('restart-quiz');
+        function openTab(tabId) {
+            var tabs = document.querySelectorAll('.tab-section');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            var quizTabs = document.querySelectorAll('.quiz-section');
+            for (var j = 0; j < quizTabs.length; j++) {
+                quizTabs[j].classList.remove('active');
+            }
+            var navBtns = document.querySelectorAll('nav a');
+            for (var k = 0; k < navBtns.length; k++) {
+                navBtns[k].classList.remove('active');
+            }
+            
+            var tab = document.getElementById(tabId);
+            if (tab) {
+                tab.classList.add('active');
+            }
+            
+            var navLink = document.querySelector('nav a[onclick="openTab(\\'' + tabId + '\\')"]');
+            if (navLink) navLink.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'quiz') {
+                generateQuiz();
+            }
+        }
+
+        function init() {
+            var restartBtn = document.getElementById('restart-quiz');
             if (restartBtn) {
-                restartBtn.addEventListener('click', function() {
+                restartBtn.onclick = function() {
                     correctAnswers = 0;
                     generateQuiz();
-                });
+                };
             }
-        });
-        
-        // Also generate quiz on page load if quiz tab is visible
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            setTimeout(generateQuiz, 200);
+        }
+
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            window.attachEvent('onload', init);
         }
     </script>
 </body>

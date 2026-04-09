@@ -1014,7 +1014,43 @@
             <h2>Test Your Knowledge</h2>
             <p class="section-intro">Answer these questions to see how much you've learned. Questions are randomly selected each time you take the quiz.</p>
 
-            <div id="quiz-container"></div>
+            <div id="quiz-container">
+                <div class="quiz-question" id="q1">
+                    <h3>Question 1</h3>
+                    <p class="quiz-prompt">Loading question...</p>
+                    <div class="quiz-options"></div>
+                    <button class="check-btn" onclick="checkAnswer(0)">Check Answer</button>
+                    <div class="feedback"></div>
+                </div>
+                <div class="quiz-question" id="q2">
+                    <h3>Question 2</h3>
+                    <p class="quiz-prompt">Loading question...</p>
+                    <div class="quiz-options"></div>
+                    <button class="check-btn" onclick="checkAnswer(1)">Check Answer</button>
+                    <div class="feedback"></div>
+                </div>
+                <div class="quiz-question" id="q3">
+                    <h3>Question 3</h3>
+                    <p class="quiz-prompt">Loading question...</p>
+                    <div class="quiz-options"></div>
+                    <button class="check-btn" onclick="checkAnswer(2)">Check Answer</button>
+                    <div class="feedback"></div>
+                </div>
+                <div class="quiz-question" id="q4">
+                    <h3>Question 4</h3>
+                    <p class="quiz-prompt">Loading question...</p>
+                    <div class="quiz-options"></div>
+                    <button class="check-btn" onclick="checkAnswer(3)">Check Answer</button>
+                    <div class="feedback"></div>
+                </div>
+                <div class="quiz-question" id="q5">
+                    <h3>Question 5</h3>
+                    <p class="quiz-prompt">Loading question...</p>
+                    <div class="quiz-options"></div>
+                    <button class="check-btn" onclick="checkAnswer(4)">Check Answer</button>
+                    <div class="feedback"></div>
+                </div>
+            </div>
 
             <div class="quiz-results" id="quiz-results">
                 <h3>Quiz Complete!</h3>
@@ -1029,7 +1065,6 @@
         <div class="footer-content">
             <div>
                 <h3>Flood Safety</h3>
-                <p class="hackathon">Flood-Safety Hackathon Submission</p>
             </div>
             <div class="team-info">
                 <div class="team-item">
@@ -1099,39 +1134,43 @@
         }
 
         function generateQuiz() {
-            const container = document.getElementById('quiz-container');
             const results = document.getElementById('quiz-results');
             
-            if (!container) return;
-            
             correctAnswers = 0;
-            
             selectedQuestions = shuffleArray(allQuestions).slice(0, 5);
-            container.innerHTML = '';
             results.classList.remove('show');
 
             selectedQuestions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'quiz-question';
+                const questionDiv = document.getElementById(`q${index + 1}`);
+                if (!questionDiv) return;
+                
                 questionDiv.dataset.correct = q.correct;
-
-                const optionsHTML = q.options.map((opt, i) => 
-                    `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`
-                ).join('');
-
-                questionDiv.innerHTML = `
-                    <h3>Question ${index + 1}</h3>
-                    <p>${q.question}</p>
-                    <div class="quiz-options">${optionsHTML}</div>
-                    <button class="check-btn" onclick="checkAnswer(${index})">Check Answer</button>
-                    <div class="feedback"></div>
-                `;
-                container.appendChild(questionDiv);
+                
+                const promptEl = questionDiv.querySelector('.quiz-prompt');
+                const optionsEl = questionDiv.querySelector('.quiz-options');
+                const feedbackEl = questionDiv.querySelector('.feedback');
+                const buttonEl = questionDiv.querySelector('.check-btn');
+                
+                if (promptEl) promptEl.textContent = q.question;
+                if (feedbackEl) {
+                    feedbackEl.textContent = '';
+                    feedbackEl.className = 'feedback';
+                }
+                if (buttonEl) {
+                    buttonEl.disabled = false;
+                    buttonEl.textContent = 'Check Answer';
+                }
+                
+                if (optionsEl) {
+                    optionsEl.innerHTML = q.options.map((opt, i) => 
+                        `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`
+                    ).join('');
+                }
             });
         }
 
         function checkAnswer(questionNum) {
-            const question = document.querySelector(`.quiz-question:nth-child(${questionNum + 1})`);
+            const question = document.getElementById(`q${questionNum + 1}`);
             if (!question) return;
             
             const correct = parseInt(question.dataset.correct);
@@ -1147,7 +1186,7 @@
             }
 
             labels.forEach(label => label.classList.add('disabled'));
-            button.disabled = true;
+            if (button) button.disabled = true;
 
             const selectedIndex = parseInt(selected.value);
 
@@ -1163,7 +1202,7 @@
                 feedback.className = "feedback show incorrect";
             }
 
-            const answeredCount = document.querySelectorAll('.check-btn:disabled').length;
+            const answeredCount = document.querySelectorAll('.quiz-section .check-btn:disabled').length;
             if (answeredCount === 5) {
                 showResults();
             }

@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flood Safety - Stay Prepared</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --before: #2563eb;
+            --before-light: #dbeafe;
+            --during: #ea580c;
+            --during-light: #ffedd5;
+            --after: #16a34a;
+            --after-light: #dcfce7;
+            --quiz: #7c3aed;
+            --quiz-light: #ede9fe;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f8fafc;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,95 +27,146 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
         }
 
         header {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            background: linear-gradient(135deg, var(--dark) 0%, #1e3a5f 100%);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 700;
             text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .tabs {
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.25rem;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .tab-btn {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid transparent;
-            color: white;
-            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            padding: 0.6rem 1.25rem;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
         .tab-btn:hover {
-            background: rgba(255,255,255,0.2);
+            color: white;
+            background: rgba(255,255,255,0.1);
         }
 
         .tab-btn.active {
             background: white;
-            color: #1e3a5f;
-            border-color: white;
-            font-weight: bold;
+            color: var(--dark);
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .hero {
-            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
         }
 
         .hero p {
             font-size: 1.1rem;
             max-width: 600px;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
+            opacity: 0.95;
         }
 
         .emergency-box {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid white;
-            border-radius: 8px;
-            padding: 1rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 1.25rem 2rem;
             display: inline-block;
         }
 
         .emergency-box strong {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
         main {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
 
         .tab-content {
             display: none;
+            animation: fadeIn 0.3s ease;
         }
 
         .tab-content.active {
             display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .section-header {
@@ -108,248 +174,366 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
         }
 
         .section-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .icon-before { background: #2b6cb0; }
-        .icon-during { background: #dd6b20; }
-        .icon-after { background: #38a169; }
-        .icon-quiz { background: #805ad5; }
+        .icon-before { background: linear-gradient(135deg, var(--before) 0%, #1d4ed8 100%); }
+        .icon-during { background: linear-gradient(135deg, var(--during) 0%, #c2410c 100%); }
+        .icon-after { background: linear-gradient(135deg, var(--after) 0%, #15803d 100%); }
+        .icon-quiz { background: linear-gradient(135deg, var(--quiz) 0%, #6d28d9 100%); }
+        .icon-home { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
 
-        h2 {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 0.95rem;
         }
 
         .checklist {
             list-style: none;
+            display: grid;
+            gap: 0.75rem;
         }
 
         .checklist li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .checklist li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            font-weight: bold;
+        .checklist li:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .check-before .check-icon { background: var(--before); }
+        .check-during .check-icon { background: var(--during); }
+        .check-after .check-icon { background: var(--after); }
 
         .tip-box {
             background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
             border-left: 4px solid;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 0 4px 4px 0;
-        }
-
-        .tip-box strong {
-            display: block;
-            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
 
         .tip-box.warning {
-            background: #fff5f5;
-            border-color: #e53e3e;
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .tip-box strong {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
         }
 
         .tip-box.warning strong {
-            color: #c53030;
+            color: #dc2626;
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .home-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .home-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .home-card.before:hover { border-color: var(--before); }
+        .home-card.during:hover { border-color: var(--during); }
+        .home-card.after:hover { border-color: var(--after); }
+        .home-card.quiz:hover { border-color: var(--quiz); }
+
+        .home-card .section-icon {
+            margin: 0 auto 1rem;
+        }
+
+        .home-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .home-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
         }
 
         .quiz-intro {
-            background: #e9d8fd;
+            background: linear-gradient(135deg, var(--quiz-light) 0%, #ddd6fe 100%);
             padding: 1.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-intro p {
+            color: #5b21b6;
+        }
+
+        .quiz-intro p:last-child {
+            font-weight: 600;
+            margin-top: 0.5rem;
         }
 
         .quiz-question {
             background: white;
-            border-radius: 8px;
+            border-radius: 16px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
         }
 
         .quiz-question h3 {
-            color: #553c9a;
+            display: inline-block;
+            background: var(--quiz);
+            color: white;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
             margin-bottom: 1rem;
-            font-size: 1.1rem;
         }
 
         .quiz-question p {
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: var(--dark);
         }
 
         .quiz-options {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 0.5rem;
         }
 
         .quiz-options label {
             display: flex;
             align-items: center;
-            padding: 0.75rem 1rem;
-            background: #f7fafc;
-            border-radius: 6px;
+            padding: 0.9rem 1.25rem;
+            background: var(--light);
+            border-radius: 10px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
             border: 2px solid transparent;
+            font-size: 0.95rem;
         }
 
         .quiz-options label:hover {
-            background: #edf2f7;
+            background: #e2e8f0;
         }
 
         .quiz-options input[type="radio"] {
             margin-right: 0.75rem;
-            transform: scale(1.2);
+            width: 18px;
+            height: 18px;
+            accent-color: var(--quiz);
         }
 
         .quiz-options label.correct {
-            background: #c6f6d5;
-            border-color: #38a169;
+            background: var(--after-light);
+            border-color: var(--after);
+            color: #166534;
         }
 
         .quiz-options label.incorrect {
-            background: #fed7d7;
-            border-color: #e53e3e;
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
         }
 
         .quiz-options label.disabled {
             pointer-events: none;
+            opacity: 0.7;
         }
 
         .check-btn {
-            background: #805ad5;
+            background: linear-gradient(135deg, var(--quiz) 0%, #6d28d9 100%);
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 1rem;
-            font-size: 1rem;
-            transition: background 0.3s;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
         }
 
         .check-btn:hover {
-            background: #6b46c1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
         }
 
         .check-btn:disabled {
-            background: #a0aec0;
+            background: #cbd5e1;
+            box-shadow: none;
             cursor: not-allowed;
+            transform: none;
         }
 
         .feedback {
             padding: 1rem;
-            border-radius: 6px;
+            border-radius: 10px;
             margin-top: 1rem;
-            font-weight: bold;
+            font-weight: 600;
             display: none;
         }
 
         .feedback.show {
             display: block;
+            animation: fadeIn 0.3s ease;
         }
 
         .feedback.correct {
-            background: #c6f6d5;
-            color: #276749;
+            background: var(--after-light);
+            color: #166534;
+            border: 1px solid var(--after);
         }
 
         .feedback.incorrect {
-            background: #fed7d7;
-            color: #c53030;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
         }
 
         .quiz-results {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
+            background: linear-gradient(135deg, var(--quiz) 0%, #6d28d9 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
             text-align: center;
-            margin-top: 2rem;
-            border: 3px solid #805ad5;
+            margin-top: 1.5rem;
+            color: white;
             display: none;
+            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.3);
         }
 
         .quiz-results.show {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
 
         .quiz-results h3 {
-            color: #553c9a;
             font-size: 1.5rem;
             margin-bottom: 1rem;
         }
 
         .quiz-results .score {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #805ad5;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
             margin: 1rem 0;
         }
 
         .quiz-results p {
-            margin-bottom: 0.5rem;
+            opacity: 0.9;
         }
 
         #restart-quiz {
-            background: #805ad5;
-            color: white;
+            background: white;
+            color: var(--quiz);
             border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 6px;
+            padding: 0.85rem 2rem;
+            border-radius: 10px;
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 1rem;
-            transition: background 0.3s;
+            margin-top: 1.25rem;
+            transition: all 0.2s ease;
         }
 
         #restart-quiz:hover {
-            background: #6b46c1;
+            transform: scale(1.05);
         }
 
         footer {
-            background: #1a202c;
+            background: var(--dark);
             color: white;
             text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 2.5rem 2rem;
+            margin-top: 3rem;
         }
 
         footer h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            opacity: 0.8;
         }
 
         .team-info {
-            display: inline-block;
-            background: #2d3748;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-align: left;
+            display: inline-flex;
+            gap: 2rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1.25rem 2rem;
+            border-radius: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .team-info p {
-            margin: 0.3rem 0;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .team-info strong {
+            opacity: 0.7;
+            font-weight: 500;
         }
 
         @media (max-width: 600px) {
@@ -358,16 +542,34 @@
             }
 
             .tab-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
             }
 
             .hero h2 {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
 
             main {
                 padding: 1rem;
+            }
+
+            .section-card {
+                padding: 1.25rem;
+            }
+
+            .home-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .quiz-results .score {
+                font-size: 3rem;
+            }
+
+            .team-info {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
             }
         }
     </style>
@@ -385,131 +587,221 @@
     </header>
 
     <div class="hero">
-        <h2>Protect Your Family, Stay Informed</h2>
-        <p>Learn essential safety steps to prepare for, respond to, and recover from flooding emergencies.</p>
-        <div class="emergency-box">
-            <strong>Emergency: Call 911</strong><br>
-            Local Emergency: (555) 123-4567<br>
-            FEMA: 1-800-621-3362
+        <div class="hero-content">
+            <h2>Protect Your Family, Stay Informed</h2>
+            <p>Learn essential safety steps to prepare for, respond to, and recover from flooding emergencies.</p>
+            <div class="emergency-box">
+                <strong>Emergency: Call 911</strong>
+                <span>FEMA: 1-800-621-3362</span>
+            </div>
         </div>
     </div>
 
     <main>
         <div id="home" class="tab-content active">
-            <h2>Welcome to Flood Safety</h2>
-            <p>This website teaches you how to stay safe before, during, and after a flood. Use the tabs above to navigate through each section.</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
-                <div class="tip-box" style="border-color: #2b6cb0; text-align: center;">
-                    <strong style="color: #2b6cb0; font-size: 1.2rem;">Before</strong>
-                    <p>Prepare your family and home before flooding occurs.</p>
-                    <button class="check-btn" style="background: #2b6cb0; margin-top: 1rem;" onclick="openTab('before')">Learn More</button>
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon icon-home">i</div>
+                    <div>
+                        <h2>Welcome to Flood Safety</h2>
+                        <p>Your guide to staying safe before, during, and after a flood</p>
+                    </div>
                 </div>
-                <div class="tip-box" style="border-color: #dd6b20; text-align: center;">
-                    <strong style="color: #dd6b20; font-size: 1.2rem;">During</strong>
-                    <p>Stay safe and make smart decisions during a flood.</p>
-                    <button class="check-btn" style="background: #dd6b20; margin-top: 1rem;" onclick="openTab('during')">Learn More</button>
-                </div>
-                <div class="tip-box" style="border-color: #38a169; text-align: center;">
-                    <strong style="color: #38a169; font-size: 1.2rem;">After</strong>
-                    <p>Recover safely and document damage for insurance.</p>
-                    <button class="check-btn" style="background: #38a169; margin-top: 1rem;" onclick="openTab('after')">Learn More</button>
-                </div>
-                <div class="tip-box" style="border-color: #805ad5; text-align: center;">
-                    <strong style="color: #805ad5; font-size: 1.2rem;">Quiz</strong>
-                    <p>Test your knowledge with our interactive quiz!</p>
-                    <button class="check-btn" style="background: #805ad5; margin-top: 1rem;" onclick="openTab('quiz')">Start Quiz</button>
+                
+                <p style="color: var(--gray); margin-bottom: 1rem;">Select a section below to learn about flood safety or test your knowledge with our interactive quiz.</p>
+                
+                <div class="home-grid">
+                    <div class="home-card before" onclick="openTab('before')">
+                        <div class="section-icon icon-before">1</div>
+                        <h3 style="color: var(--before);">Before</h3>
+                        <p>Prepare your family and home before flooding occurs</p>
+                    </div>
+                    <div class="home-card during" onclick="openTab('during')">
+                        <div class="section-icon icon-during">2</div>
+                        <h3 style="color: var(--during);">During</h3>
+                        <p>Stay safe and make smart decisions during a flood</p>
+                    </div>
+                    <div class="home-card after" onclick="openTab('after')">
+                        <div class="section-icon icon-after">3</div>
+                        <h3 style="color: var(--after);">After</h3>
+                        <p>Recover safely and document damage for insurance</p>
+                    </div>
+                    <div class="home-card quiz" onclick="openTab('quiz')">
+                        <div class="section-icon icon-quiz">?</div>
+                        <h3 style="color: var(--quiz);">Quiz</h3>
+                        <p>Test your knowledge with our interactive quiz</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div id="before" class="tab-content">
-            <div class="section-header">
-                <div class="section-icon icon-before">!</div>
-                <h2 style="color: #2b6cb0; margin: 0;">Before a Flood</h2>
-            </div>
-            <p>Preparation is key. Take these steps before flooding occurs to keep your family safe.</p>
-            
-            <ul class="checklist" style="color: #2b6cb0;">
-                <li><strong>Build an emergency kit</strong> with water (1 gallon per person per day), non-perishable food, flashlight, batteries, first aid supplies, and medications.</li>
-                <li><strong>Create a family communication plan</strong> with meeting points and emergency contacts written down and shared with all family members.</li>
-                <li><strong>Know your evacuation routes</strong> - identify high ground locations and practice reaching them from your home.</li>
-                <li><strong>Protect important documents</strong> by placing them in waterproof bags or storing digital copies in cloud storage.</li>
-                <li><strong>Elevate utilities</strong> - move electrical panels, furnaces, and water heaters to higher floors if possible.</li>
-                <li><strong>Sign up for emergency alerts</strong> through your local government notification system.</li>
-                <li><strong>Clear gutters and drains</strong> around your property to allow water to flow away from your home.</li>
-            </ul>
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon icon-before">1</div>
+                    <div>
+                        <h2>Before a Flood</h2>
+                        <p>Preparation is key to keeping your family safe</p>
+                    </div>
+                </div>
+                
+                <ul class="checklist">
+                    <li class="check-before">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Build an emergency kit</strong> with water (1 gallon per person per day), non-perishable food, flashlight, batteries, first aid supplies, and medications.</div>
+                    </li>
+                    <li class="check-before">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Create a family communication plan</strong> with meeting points and emergency contacts written down and shared with all family members.</div>
+                    </li>
+                    <li class="check-before">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Know your evacuation routes</strong> - identify high ground locations and practice reaching them from your home.</div>
+                    </li>
+                    <li class="check-before">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Protect important documents</strong> by placing them in waterproof bags or storing digital copies in cloud storage.</div>
+                    </li>
+                    <li class="check-before">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Elevate utilities</strong> - move electrical panels, furnaces, and water heaters to higher floors if possible.</div>
+                    </li>
+                    <li class="check-before">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Sign up for emergency alerts</strong> through your local government notification system.</div>
+                    </li>
+                    <li class="check-before">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Clear gutters and drains</strong> around your property to allow water to flow away from your home.</div>
+                    </li>
+                </ul>
 
-            <div class="tip-box" style="border-color: #2b6cb0;">
-                <strong>Pro Tip: Important Documents</strong>
-                Keep copies of insurance policies, identification, bank records, and medical information in a secure, waterproof location.
+                <div class="tip-box" style="border-color: var(--before);">
+                    <strong>💡 Pro Tip</strong>
+                    Keep copies of insurance policies, identification, bank records, and medical information in a secure, waterproof location.
+                </div>
             </div>
         </div>
 
         <div id="during" class="tab-content">
-            <div class="section-header">
-                <div class="section-icon icon-during">!</div>
-                <h2 style="color: #c05621; margin: 0;">During a Flood</h2>
-            </div>
-            <p>When flooding occurs, act quickly and stay calm. Your decisions matter.</p>
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon icon-during">2</div>
+                    <div>
+                        <h2>During a Flood</h2>
+                        <p>Act quickly and stay calm - your decisions matter</p>
+                    </div>
+                </div>
+                
+                <ul class="checklist">
+                    <li class="check-during">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Move to higher ground immediately</strong> - go to the highest level of your home or a neighbor's if needed.</div>
+                    </li>
+                    <li class="check-during">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Never walk, swim, or drive through flood waters</strong> - just 6 inches of moving water can knock you down, and 12 inches can sweep a car away.</div>
+                    </li>
+                    <li class="check-during">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Listen to emergency broadcasts</strong> - TV, radio, or NOAA Weather Radio for updates and instructions.</div>
+                    </li>
+                    <li class="check-during">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Turn off utilities</strong> if instructed and if you can do so safely without standing in water.</div>
+                    </li>
+                    <li class="check-during">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Avoid bridges over fast-moving water</strong> - find alternate routes or wait for rescue if trapped.</div>
+                    </li>
+                    <li class="check-during">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Stay inside until officially declared safe</strong> - even if the rain stops, flooding can continue for hours.</div>
+                    </li>
+                </ul>
 
-            <ul class="checklist" style="color: #dd6b20;">
-                <li><strong>Move to higher ground immediately</strong> - go to the highest level of your home or a neighbor's if needed.</li>
-                <li><strong>Never walk, swim, or drive through flood waters</strong> - just 6 inches of moving water can knock you down, and 12 inches can sweep a car away.</li>
-                <li><strong>Listen to emergency broadcasts</strong> - TV, radio, or NOAA Weather Radio for updates and instructions.</li>
-                <li><strong>Turn off utilities</strong> if instructed and if you can do so safely without standing in water.</li>
-                <li><strong>Avoid bridges over fast-moving water</strong> - find alternate routes or wait for rescue if trapped.</li>
-                <li><strong>Stay inside until officially declared safe</strong> - even if the rain stops, flooding can continue for hours.</li>
-            </ul>
-
-            <div class="tip-box warning">
-                <strong>WARNING: Never Drive Through Flood Water</strong>
-                Most flood deaths occur in vehicles. If your car stalls in rising water, abandon it immediately and move to higher ground.
+                <div class="tip-box warning">
+                    <strong>⚠️ Warning</strong>
+                    Most flood deaths occur in vehicles. If your car stalls in rising water, abandon it immediately and move to higher ground.
+                </div>
             </div>
         </div>
 
         <div id="after" class="tab-content">
-            <div class="section-header">
-                <div class="section-icon icon-after">!</div>
-                <h2 style="color: #276749; margin: 0;">After a Flood</h2>
-            </div>
-            <p>The danger isn't over when the water recedes. Follow these steps for safe recovery.</p>
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon icon-after">3</div>
+                    <div>
+                        <h2>After a Flood</h2>
+                        <p>The danger isn't over when the water recedes</p>
+                    </div>
+                </div>
+                
+                <ul class="checklist">
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Return home only when authorities say it's safe</strong> - check for structural damage before entering.</div>
+                    </li>
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Wear protective gear</strong> including boots, gloves, and masks when cleaning - flood water may contain sewage and chemicals.</div>
+                    </li>
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Document all damage</strong> with photos and videos before starting cleanup for insurance purposes.</div>
+                    </li>
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Discard food and water</strong> that may have come into contact with flood water - when in doubt, throw it out.</div>
+                    </li>
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Ventilate and dry your home</strong> - open doors and windows, use fans and dehumidifiers to prevent mold.</div>
+                    </li>
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Check for gas leaks</strong> - if you smell gas or hear hissing, leave immediately and call the gas company.</div>
+                    </li>
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Contact your insurance company</strong> as soon as possible to start the claims process.</div>
+                    </li>
+                    <li class="check-after">
+                        <span class="check-icon">✓</span>
+                        <div><strong>Seek medical attention</strong> for any injuries, and watch for signs of infection or illness.</div>
+                    </li>
+                </ul>
 
-            <ul class="checklist" style="color: #38a169;">
-                <li><strong>Return home only when authorities say it's safe</strong> - check for structural damage before entering.</li>
-                <li><strong>Wear protective gear</strong> including boots, gloves, and masks when cleaning - flood water may contain sewage and chemicals.</li>
-                <li><strong>Document all damage</strong> with photos and videos before starting cleanup for insurance purposes.</li>
-                <li><strong>Discard food and water</strong> that may have come into contact with flood water - when in doubt, throw it out.</li>
-                <li><strong>Ventilate and dry your home</strong> - open doors and windows, use fans and dehumidifiers to prevent mold.</li>
-                <li><strong>Check for gas leaks</strong> - if you smell gas or hear hissing, leave immediately and call the gas company.</li>
-                <li><strong>Contact your insurance company</strong> as soon as possible to start the claims process.</li>
-                <li><strong>Seek medical attention</strong> for any injuries, and watch for signs of infection or illness.</li>
-            </ul>
-
-            <div class="tip-box" style="border-color: #38a169;">
-                <strong>Recovery Tip: Watch for Mold</strong>
-                Mold can begin growing within 24-48 hours. Dry out your home quickly and clean all surfaces with a bleach solution (1 cup bleach per gallon of water).
+                <div class="tip-box" style="border-color: var(--after);">
+                    <strong>💡 Recovery Tip</strong>
+                    Mold can begin growing within 24-48 hours. Dry out your home quickly and clean all surfaces with a bleach solution (1 cup bleach per gallon of water).
+                </div>
             </div>
         </div>
 
         <div id="quiz" class="tab-content">
-            <div class="section-header">
-                <div class="section-icon icon-quiz">?</div>
-                <h2 style="color: #6b46c1; margin: 0;">Test Your Knowledge</h2>
-            </div>
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon icon-quiz">?</div>
+                    <div>
+                        <h2>Test Your Knowledge</h2>
+                        <p>See how much you've learned about flood safety</p>
+                    </div>
+                </div>
 
-            <div class="quiz-intro">
-                <p>See how much you've learned about flood safety! Answer these questions and click "Check Answer" to see your results.</p>
-                <p><strong>Questions are randomly selected each time you refresh!</strong></p>
-            </div>
+                <div class="quiz-intro">
+                    <p>Answer these questions and click "Check Answer" to see your results.</p>
+                    <p>Questions are randomly selected each time!</p>
+                </div>
 
-            <div id="quiz-container"></div>
+                <div id="quiz-container"></div>
 
-            <div class="quiz-results" id="quiz-results">
-                <h3>Quiz Complete!</h3>
-                <div class="score"><span id="score">0</span>/5</div>
-                <p id="score-message"></p>
-                <button id="restart-quiz" onclick="generateQuiz()">Take New Quiz</button>
+                <div class="quiz-results" id="quiz-results">
+                    <h3>Quiz Complete!</h3>
+                    <div class="score"><span id="score">0</span>/5</div>
+                    <p id="score-message"></p>
+                    <button id="restart-quiz" onclick="generateQuiz()">Take New Quiz</button>
+                </div>
             </div>
         </div>
     </main>
@@ -528,92 +820,77 @@
             {
                 question: "How much water is needed per person per day in an emergency kit?",
                 options: ["Half a gallon", "1 gallon", "2 gallons", "5 gallons"],
-                correct: 1,
-                topic: "Before"
+                correct: 1
             },
             {
                 question: "How many inches of moving flood water can sweep a car away?",
                 options: ["6 inches", "8 inches", "12 inches", "18 inches"],
-                correct: 2,
-                topic: "During"
+                correct: 2
             },
             {
                 question: "How quickly can mold begin growing after a flood?",
                 options: ["Within 24-48 hours", "Within 1 week", "Within 2 weeks", "Within 1 month"],
-                correct: 0,
-                topic: "After"
+                correct: 0
             },
             {
                 question: "What should you do FIRST when returning home after a flood?",
                 options: ["Start cleaning immediately", "Open all windows", "Turn on all lights", "Return only when authorities say it's safe"],
-                correct: 3,
-                topic: "After"
+                correct: 3
             },
             {
                 question: "How much bleach should you use per gallon of water to clean flood-damaged surfaces?",
                 options: ["Half a cup", "1 cup", "2 cups", "A few drops"],
-                correct: 1,
-                topic: "After"
+                correct: 1
             },
             {
                 question: "How much running water can knock a person down?",
                 options: ["2 inches", "4 inches", "6 inches", "10 inches"],
-                correct: 2,
-                topic: "During"
+                correct: 2
             },
             {
                 question: "What should you include in your family communication plan?",
                 options: ["Only phone numbers", "Meeting points and emergency contacts", "Only email addresses", "Social media passwords"],
-                correct: 1,
-                topic: "Before"
+                correct: 1
             },
             {
                 question: "Why should you avoid bridges over fast-moving water?",
                 options: ["They might be closed", "Traffic is heavy", "They can collapse from water force", "They're hard to see"],
-                correct: 2,
-                topic: "During"
+                correct: 2
             },
             {
                 question: "What is a key step to protect important documents before a flood?",
                 options: ["Hide them under your bed", "Place them in waterproof bags or cloud storage", "Give them to your neighbor", "Put them in the freezer"],
-                correct: 1,
-                topic: "Before"
+                correct: 1
             },
             {
                 question: "What should you do if you smell gas after a flood?",
                 options: ["Open windows", "Turn on lights", "Leave immediately and call the gas company", "Light a candle"],
-                correct: 2,
-                topic: "After"
+                correct: 2
             },
             {
                 question: "What does signing up for emergency alerts help you do?",
                 options: ["Get discounts", "Receive early warning notifications", "Find new friends", "Win prizes"],
-                correct: 1,
-                topic: "Before"
+                correct: 1
             },
             {
                 question: "Why is flood water dangerous even after the rain stops?",
                 options: ["It attracts snakes", "Flooding can continue for hours", "It makes roads slippery", "It attracts mosquitoes"],
-                correct: 1,
-                topic: "During"
+                correct: 1
             },
             {
                 question: "What protective gear should you wear when cleaning after a flood?",
                 options: ["Swimsuit and sandals", "Boots, gloves, and masks", "Just gloves", "Nothing special"],
-                correct: 1,
-                topic: "After"
+                correct: 1
             },
             {
                 question: "Where should you move electrical panels, furnaces, and water heaters?",
                 options: ["Basement", "Attic", "Higher floors", "Garage"],
-                correct: 2,
-                topic: "Before"
+                correct: 2
             },
             {
                 question: "Why is documenting flood damage important?",
                 options: ["For social media", "For insurance claims", "To show friends", "To remember the event"],
-                correct: 1,
-                topic: "After"
+                correct: 1
             }
         ];
 
@@ -648,7 +925,7 @@
                 ).join('');
 
                 questionDiv.innerHTML = `
-                    <h3>Question ${index + 1} of 5</h3>
+                    <h3>Q${index + 1}</h3>
                     <p>${q.question}</p>
                     <div class="quiz-options">${optionsHTML}</div>
                     <button class="check-btn" onclick="checkAnswer(${index})">Check Answer</button>
@@ -688,19 +965,18 @@
 
             labels.forEach(label => label.classList.add('disabled'));
             button.disabled = true;
-            button.style.background = '#a0aec0';
 
             const selectedIndex = parseInt(selected.value);
 
             if (selectedIndex === correct) {
                 selected.parentElement.classList.add('correct');
-                feedback.textContent = "Correct! Great job!";
+                feedback.innerHTML = "✓ Correct! Great job!";
                 feedback.className = "feedback show correct";
                 correctAnswers++;
             } else {
                 selected.parentElement.classList.add('incorrect');
                 labels[correct].classList.add('correct');
-                feedback.textContent = "Incorrect. The correct answer is highlighted in green.";
+                feedback.innerHTML = "✗ Incorrect. The correct answer is highlighted in green.";
                 feedback.className = "feedback show incorrect";
             }
 
@@ -717,15 +993,15 @@
 
             scoreEl.textContent = correctAnswers;
 
-            if (correctAnswers === 5) {
-                messageEl.textContent = "Perfect score! You're a flood safety expert!";
-            } else if (correctAnswers >= 4) {
-                messageEl.textContent = "Excellent! You know your flood safety well!";
-            } else if (correctAnswers >= 3) {
-                messageEl.textContent = "Good job! Review the sections to improve.";
-            } else {
-                messageEl.textContent = "Keep learning! Read through the tips again.";
-            }
+            const messages = [
+                "Keep learning! Read through the tips again.",
+                "Good start! Review the sections to improve.",
+                "Good job! You're getting there.",
+                "Great work! You know your flood safety well.",
+                "Excellent! Almost perfect!",
+                "Perfect score! You're a flood safety expert!"
+            ];
+            messageEl.textContent = messages[correctAnswers];
 
             results.classList.add('show');
             results.scrollIntoView({ behavior: 'smooth' });

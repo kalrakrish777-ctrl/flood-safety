@@ -98,6 +98,10 @@
             background: linear-gradient(180deg, #f0fff4 0%, #c6f6d5 100%);
         }
 
+        .section-quiz {
+            background: linear-gradient(180deg, #e9d8fd 0%, #d6bcfa 100%);
+        }
+
         section h2 {
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
@@ -118,6 +122,11 @@
         .section-after h2 {
             color: #276749;
             border-color: #38a169;
+        }
+
+        .section-quiz h2 {
+            color: #6b46c1;
+            border-color: #805ad5;
         }
 
         .checklist {
@@ -183,6 +192,146 @@
             color: #c53030;
         }
 
+        .quiz-intro {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .quiz-intro p {
+            margin-bottom: 1rem;
+        }
+
+        .quiz-question {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #805ad5;
+        }
+
+        .quiz-question h3 {
+            color: #553c9a;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .quiz-question p {
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-options label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: #f7fafc;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .quiz-options label:hover {
+            background: #edf2f7;
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
+        }
+
+        .quiz-options label.correct {
+            background: #c6f6d5;
+            border-color: #38a169;
+        }
+
+        .quiz-options label.incorrect {
+            background: #fed7d7;
+            border-color: #e53e3e;
+        }
+
+        .quiz-options label.disabled {
+            pointer-events: none;
+        }
+
+        .feedback {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        .feedback.incorrect {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .quiz-results {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            border: 3px solid #805ad5;
+            display: none;
+        }
+
+        .quiz-results.show {
+            display: block;
+        }
+
+        .quiz-results h3 {
+            color: #553c9a;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-results .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #805ad5;
+            margin: 1rem 0;
+        }
+
+        .quiz-results p {
+            margin-bottom: 0.5rem;
+        }
+
+        #restart-quiz {
+            background: #805ad5;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        #restart-quiz:hover {
+            background: #6b46c1;
+        }
+
         footer {
             background: #1a202c;
             color: white;
@@ -237,6 +386,7 @@
             <a href="#before">Before a Flood</a>
             <a href="#during">During a Flood</a>
             <a href="#after">After a Flood</a>
+            <a href="#quiz">Quiz</a>
         </nav>
     </header>
 
@@ -298,7 +448,7 @@
             <li><strong>Wear protective gear</strong> including boots, gloves, and masks when cleaning - flood water may contain sewage and chemicals.</li>
             <li><strong>Document all damage</strong> with photos and videos before starting cleanup for insurance purposes.</li>
             <li><strong>Discard food and water</strong> that may have come into contact with flood water - when in doubt, throw it out.</li>
-            <li><strong> ventilate and dry your home</strong> - open doors and windows, use fans and dehumidifiers to prevent mold.</li>
+            <li><strong>Ventilate and dry your home</strong> - open doors and windows, use fans and dehumidifiers to prevent mold.</li>
             <li><strong>Check for gas leaks</strong> - if you smell gas or hear hissing, leave immediately and call the gas company.</li>
             <li><strong>Contact your insurance company</strong> as soon as possible to start the claims process.</li>
             <li><strong>Seek medical attention</strong> for any injuries, and watch for signs of infection or illness.</li>
@@ -310,6 +460,89 @@
         </div>
     </section>
 
+    <section id="quiz" class="section-quiz">
+        <h2>Test Your Knowledge</h2>
+        <p>See how much you've learned about flood safety! Answer these questions based on the information above.</p>
+
+        <div class="quiz-intro">
+            <p>Select the correct answer for each question and click "Check Answer" to see your results.</p>
+        </div>
+
+        <div id="quiz-container">
+            <div class="quiz-question" data-correct="b">
+                <h3>Question 1 of 5</h3>
+                <p>How much water is needed per person per day in an emergency kit?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q1" value="a"> A) Half a gallon</label>
+                    <label><input type="radio" name="q1" value="b"> B) 1 gallon</label>
+                    <label><input type="radio" name="q1" value="c"> C) 2 gallons</label>
+                    <label><input type="radio" name="q1" value="d"> D) 5 gallons</label>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(1)">Check Answer</button>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="quiz-question" data-correct="c">
+                <h3>Question 2 of 5</h3>
+                <p>How many inches of moving flood water can sweep a car away?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q2" value="a"> A) 6 inches</label>
+                    <label><input type="radio" name="q2" value="b"> B) 8 inches</label>
+                    <label><input type="radio" name="q2" value="c"> C) 12 inches</label>
+                    <label><input type="radio" name="q2" value="d"> D) 18 inches</label>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(2)">Check Answer</button>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="quiz-question" data-correct="a">
+                <h3>Question 3 of 5</h3>
+                <p>How quickly can mold begin growing after a flood?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q3" value="a"> A) Within 24-48 hours</label>
+                    <label><input type="radio" name="q3" value="b"> B) Within 1 week</label>
+                    <label><input type="radio" name="q3" value="c"> C) Within 2 weeks</label>
+                    <label><input type="radio" name="q3" value="d"> D) Within 1 month</label>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(3)">Check Answer</button>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="quiz-question" data-correct="d">
+                <h3>Question 4 of 5</h3>
+                <p>What should you do FIRST when returning home after a flood?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q4" value="a"> A) Start cleaning immediately</label>
+                    <label><input type="radio" name="q4" value="b"> B) Open all windows</label>
+                    <label><input type="radio" name="q4" value="c"> C) Turn on all lights</label>
+                    <label><input type="radio" name="q4" value="d"> D) Return only when authorities say it's safe</label>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(4)">Check Answer</button>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="quiz-question" data-correct="b">
+                <h3>Question 5 of 5</h3>
+                <p>How much bleach should you use per gallon of water to clean flood-damaged surfaces?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q5" value="a"> A) Half a cup</label>
+                    <label><input type="radio" name="q5" value="b"> B) 1 cup</label>
+                    <label><input type="radio" name="q5" value="c"> C) 2 cups</label>
+                    <label><input type="radio" name="q5" value="d"> D) A few drops</label>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(5)">Check Answer</button>
+                <div class="feedback"></div>
+            </div>
+        </div>
+
+        <div class="quiz-results" id="quiz-results">
+            <h3>Quiz Complete!</h3>
+            <div class="score"><span id="score">0</span>/5</div>
+            <p id="score-message"></p>
+            <button id="restart-quiz" onclick="restartQuiz()">Take Quiz Again</button>
+        </div>
+    </section>
+
     <footer>
         <h3>Flood-Safety Hackathon Submission</h3>
         <div class="team-info">
@@ -318,5 +551,94 @@
             <p><strong>Grade:</strong> 11</p>
         </div>
     </footer>
+
+    <script>
+        let correctAnswers = 0;
+
+        function checkAnswer(questionNum) {
+            const question = document.querySelector(`.quiz-question:nth-child(${questionNum})`);
+            const correct = question.dataset.correct;
+            const selected = document.querySelector(`input[name="q${questionNum}"]:checked`);
+            const labels = question.querySelectorAll('label');
+            const feedback = question.querySelector('.feedback');
+            const button = question.querySelector('.check-btn');
+
+            if (!selected) {
+                feedback.textContent = "Please select an answer first!";
+                feedback.className = "feedback show incorrect";
+                return;
+            }
+
+            labels.forEach(label => label.classList.add('disabled'));
+            button.disabled = true;
+            button.style.background = '#a0aec0';
+
+            if (selected.value === correct) {
+                selected.parentElement.classList.add('correct');
+                feedback.textContent = "Correct! Great job!";
+                feedback.className = "feedback show correct";
+                correctAnswers++;
+            } else {
+                selected.parentElement.classList.add('incorrect');
+                labels.forEach(label => {
+                    if (label.querySelector('input').value === correct) {
+                        label.classList.add('correct');
+                    }
+                });
+                feedback.textContent = "Incorrect. The correct answer is highlighted in green.";
+                feedback.className = "feedback show incorrect";
+            }
+
+            const allAnswered = document.querySelectorAll('.quiz-question').length === document.querySelectorAll('.check-btn:disabled').length;
+            if (allAnswered) {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const results = document.getElementById('quiz-results');
+            const scoreEl = document.getElementById('score');
+            const messageEl = document.getElementById('score-message');
+
+            scoreEl.textContent = correctAnswers;
+
+            if (correctAnswers === 5) {
+                messageEl.textContent = "Perfect score! You're a flood safety expert!";
+            } else if (correctAnswers >= 4) {
+                messageEl.textContent = "Excellent! You know your flood safety well!";
+            } else if (correctAnswers >= 3) {
+                messageEl.textContent = "Good job! Review the sections to improve.";
+            } else {
+                messageEl.textContent = "Keep learning! Read through the tips again.";
+            }
+
+            results.classList.add('show');
+            results.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            correctAnswers = 0;
+            const questions = document.querySelectorAll('.quiz-question');
+            const results = document.getElementById('quiz-results');
+
+            questions.forEach(question => {
+                const labels = question.querySelectorAll('label');
+                const button = question.querySelector('.check-btn');
+                const feedback = question.querySelector('.feedback');
+                const radios = question.querySelectorAll('input[type="radio"]');
+
+                labels.forEach(label => {
+                    label.classList.remove('correct', 'incorrect', 'disabled');
+                });
+                radios.forEach(radio => radio.checked = false);
+                button.disabled = false;
+                button.style.background = '#805ad5';
+                feedback.className = 'feedback';
+            });
+
+            results.classList.remove('show');
+            window.scrollTo({ top: document.getElementById('quiz').offsetTop, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
